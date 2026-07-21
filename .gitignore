@@ -1,0 +1,42 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.output
+.nuxt
+.nitro
+.cache
+*.tsbuildinfo
+
+# Test / coverage
+coverage
+.vitest
+test-results
+playwright-report
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+*.local
+.eslintcache
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Storybook
+storybook-static
+
+# IDE
+.idea
+/package-lock.json
+
+# Release automation (local working copies, cloned from external repos)
+.release-repo
+.docs-release-repo
+.dev-repo
