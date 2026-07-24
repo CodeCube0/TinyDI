@@ -42,7 +42,7 @@ npm run dev                   # vue, nuxt, react (dev server)
 
 ### Running the docs site
 
-`docs-app/` is a separate package (own `package.json`), unrelated to the `tinydi-container` npm package itself — it doesn't depend on `src/` or `dist/` at all, it's a static site _about_ the library.
+`docs-app/` is a separate package (own `package.json`), unrelated to the `tinydi-container` npm package itself — it doesn't depend on `src/` or `dist/` at all, it's a static site _about_ the library. **Live at <https://codecube0.github.io/TinyDI/>** (EN) / <https://codecube0.github.io/TinyDI/it/> (IT) — see the "GitHub Pages" note further down for how it gets deployed there.
 
 ```bash
 cd docs-app

@@ -6,6 +6,8 @@ Un container di Dependency Injection per TypeScript minimale, type-safe e senza 
 [![npm downloads](https://img.shields.io/npm/dm/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
+📚 **[Documentazione completa](https://codecube0.github.io/TinyDI/it/)**
+
 _[Read this in English](./README.md)_
 
 ## Introduzione

@@ -2,6 +2,8 @@
 
 Thanks for considering a contribution to TinyDI. This document covers local setup, code conventions, and how to propose changes.
 
+See the [full documentation](https://codecube0.github.io/TinyDI/) for how TinyDI works from a user's perspective before diving into the code.
+
 ## Code of Conduct
 
 This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). By participating, you're expected to uphold it.

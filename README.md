@@ -6,6 +6,8 @@ A minimal, type-safe, decorator-free Dependency Injection container for TypeScri
 [![npm downloads](https://img.shields.io/npm/dm/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
+📚 **[Full documentation](https://codecube0.github.io/TinyDI/)**
+
 ## Introduction
 
 TinyDI is a small Dependency Injection (DI) container for TypeScript, Node.js, Bun, Deno and modern browsers. It gives you a `Container` you register services on and resolve them from, with full type inference and zero runtime dependencies — no reflection, no decorators, no metadata, no automatic constructor injection.

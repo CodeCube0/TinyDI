@@ -2,6 +2,8 @@
 
 TinyDI's documentation and project site. Plain HTML/CSS/JS — no frontend framework. `build.mjs` is a small Node static-site generator (dev-time only) that reads `src/content` + `src/templates` and emits the deployable site into `dist/`.
 
+**Live at <https://codecube0.github.io/TinyDI/>** (EN) / <https://codecube0.github.io/TinyDI/it/> (IT), deployed automatically by `.github/workflows/docs.yml` on every push to `main` that touches `docs-app/**`.
+
 ## Run it
 
 ```bash
