@@ -1,6 +1,6 @@
 {
   "name": "tinydi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.",
   "type": "module",
   "license": "MIT",
