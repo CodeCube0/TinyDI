@@ -56,6 +56,8 @@ npx changeset
 
 Follow the prompts to describe the change and pick a semver bump (patch/minor/major, per [Semantic Versioning](https://semver.org/)). Docs-only or example-only changes don't need a changeset.
 
+See [RELEASE.md](RELEASE.md) for the full release process (maintainers only) from changeset to a published npm version.
+
 ## Proposing changes
 
 1. Open an issue first for anything beyond a small fix, using the Bug Report or Feature Request template.
