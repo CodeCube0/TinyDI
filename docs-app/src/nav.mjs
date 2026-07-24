@@ -1,7 +1,17 @@
 // Placeholder production origin, used only to build absolute hreflang/canonical
 // URLs. TinyDI has not been assigned a real domain yet (that's Phase 4 scope,
-// see reports/03-docs-website.md) — replace this once one exists.
-export const SITE_URL = 'https://tinydi.dev';
+// see reports/03-docs-website.md) — replace this once one exists. Overridable
+// via DOCS_SITE_URL so CI can build for the real deploy target (e.g. GitHub
+// Pages' https://codecube0.github.io) without touching this default, which
+// stays correct for local dev.
+export const SITE_URL = process.env.DOCS_SITE_URL ?? 'https://tinydi.dev';
+
+// Prefix for every root-relative internal path (styles, scripts, assets,
+// search index, and page links via docsHref/homeHref below). Empty for local
+// dev and for a future custom domain (both serve the site from `/`); set to
+// e.g. "/TinyDI" in CI when deploying to GitHub Pages' default project-page
+// URL, which serves the site under a subpath instead of the domain root.
+export const BASE_PATH = process.env.DOCS_BASE_PATH ?? '';
 
 // Shared nav model — one source of truth for the sidebar, the search index
 // page grouping, and the header's primary nav.
@@ -71,11 +81,11 @@ export const strings = {
 };
 
 export function docsHref(lang, id) {
-  return lang === 'en' ? `/docs/${id}.html` : `/it/docs/${id}.html`;
+  return lang === 'en' ? `${BASE_PATH}/docs/${id}.html` : `${BASE_PATH}/it/docs/${id}.html`;
 }
 
 export function homeHref(lang) {
-  return lang === 'en' ? '/' : '/it/';
+  return lang === 'en' ? `${BASE_PATH}/` : `${BASE_PATH}/it/`;
 }
 
 export function otherLang(lang) {

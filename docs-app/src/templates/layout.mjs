@@ -1,4 +1,4 @@
-import { docsNav, strings, docsHref, homeHref, otherLang, SITE_URL } from '../nav.mjs';
+import { docsNav, strings, docsHref, homeHref, otherLang, SITE_URL, BASE_PATH } from '../nav.mjs';
 import { icon } from '../lib/icons.mjs';
 
 function themeInitScript() {
@@ -50,11 +50,11 @@ function head({ lang, pageId, title, description, section }) {
   <meta property="og:description" content="${description}" />
   <meta property="og:locale" content="${lang === 'en' ? 'en_US' : 'it_IT'}" />
   <meta name="twitter:card" content="summary" />
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-  <link rel="stylesheet" href="/styles/fonts.css" />
-  <link rel="stylesheet" href="/styles/tokens.css" />
-  <link rel="stylesheet" href="/styles/base.css" />
-  <link rel="stylesheet" href="/styles/components.css" />
+  <link rel="icon" type="image/svg+xml" href="${BASE_PATH}/assets/favicon.svg" />
+  <link rel="stylesheet" href="${BASE_PATH}/styles/fonts.css" />
+  <link rel="stylesheet" href="${BASE_PATH}/styles/tokens.css" />
+  <link rel="stylesheet" href="${BASE_PATH}/styles/base.css" />
+  <link rel="stylesheet" href="${BASE_PATH}/styles/components.css" />
   <script>${themeInitScript()}</script>
   <script>${platformInitScript()}</script>
   <script>${langBannerInitScript(otherLang(lang))}</script>`;
@@ -183,7 +183,7 @@ function tocMarkup(lang, tocItems) {
 function searchDialogMarkup(lang) {
   const s = strings[lang];
   return `
-  <dialog class="search-dialog" data-search-dialog data-index-url="/search-index.${lang}.json" aria-label="${s.searchLabel}">
+  <dialog class="search-dialog" data-search-dialog data-index-url="${BASE_PATH}/search-index.${lang}.json" aria-label="${s.searchLabel}">
     <div class="search-dialog__inner">
       <div class="search-dialog__input-row">
         ${icon('search')}
@@ -250,11 +250,11 @@ ${head(options)}
   ${footerMarkup(lang)}
   ${drawerMarkup(options)}
   ${searchDialogMarkup(lang)}
-  <script src="/scripts/theme.js" defer></script>
-  <script src="/scripts/nav.js" defer></script>
-  <script src="/scripts/code-block.js" defer></script>
-  <script src="/scripts/search.js" defer></script>
-  <script src="/scripts/lang.js" defer></script>
+  <script src="${BASE_PATH}/scripts/theme.js" defer></script>
+  <script src="${BASE_PATH}/scripts/nav.js" defer></script>
+  <script src="${BASE_PATH}/scripts/code-block.js" defer></script>
+  <script src="${BASE_PATH}/scripts/search.js" defer></script>
+  <script src="${BASE_PATH}/scripts/lang.js" defer></script>
 </body>
 </html>`;
 }

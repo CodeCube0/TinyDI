@@ -8,7 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { renderLayout } from './src/templates/layout.mjs';
 import { renderHome } from './src/templates/home.mjs';
 import { renderBlocks } from './src/lib/blocks.mjs';
-import { docsNav, docsHref, homeHref, SITE_URL } from './src/nav.mjs';
+import { docsNav, docsHref, homeHref, SITE_URL, BASE_PATH } from './src/nav.mjs';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const distDir = join(rootDir, 'dist');
@@ -38,6 +38,20 @@ function copyDir(srcDir, destDir) {
   }
 }
 
+// Physical output paths inside dist/ — deliberately BASE_PATH-free. dist/ is
+// uploaded as-is to whatever URL subpath the deploy target serves it under
+// (GitHub Pages adds the repo name automatically for project sites); baking
+// BASE_PATH into these would nest an extra physical directory inside dist/
+// and double the prefix. docsHref/homeHref from nav.mjs (BASE_PATH-aware) are
+// for content — hrefs, canonical links, sitemap entries — not file placement.
+function docsFilePath(lang, id) {
+  return lang === 'en' ? `docs/${id}.html` : `it/docs/${id}.html`;
+}
+
+function homeFilePath(lang) {
+  return lang === 'en' ? 'index.html' : 'it/index.html';
+}
+
 function extractToc(blocks) {
   return blocks
     .filter((b) => b.type === 'heading' && b.level === 2)
@@ -65,7 +79,7 @@ async function buildDocsPages(lang, searchEntries) {
       tocItems,
     });
 
-    write(docsHref(lang, navItem.id).slice(1), pageHtml);
+    write(docsFilePath(lang, navItem.id), pageHtml);
 
     const pageUrl = docsHref(lang, navItem.id);
     for (const chunk of chunks) {
@@ -97,7 +111,7 @@ function buildHomePage(lang) {
     bodyHtml: renderHome(lang),
   });
 
-  write(homeHref(lang).slice(1) + 'index.html', pageHtml);
+  write(homeFilePath(lang), pageHtml);
 }
 
 function buildSearchIndex(lang, entries) {
@@ -106,8 +120,8 @@ function buildSearchIndex(lang, entries) {
 
 function buildSitemap() {
   const urls = [
-    '/',
-    '/it/',
+    homeHref('en'),
+    homeHref('it'),
     ...docsNav.flatMap((n) => [docsHref('en', n.id), docsHref('it', n.id)]),
   ];
   const entries = urls.map((u) => `  <url><loc>${SITE_URL}${u}</loc></url>`).join('\n');
@@ -115,7 +129,7 @@ function buildSitemap() {
     'sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`,
   );
-  write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+  write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}${BASE_PATH}/sitemap.xml\n`);
 }
 
 async function main() {
