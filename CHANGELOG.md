@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- 3ab543a: Initial release: minimal, type-safe, decorator-free Dependency Injection container for TypeScript (Container with `registerInstance`/`registerFactory`/`resolve`/`has`/`remove`/`clear`, `Singleton`/`Transient` lifetimes, type-safe tokens, circular dependency detection).
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
