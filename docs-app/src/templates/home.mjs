@@ -61,7 +61,7 @@ const COPY = {
     quickStartTitle: 'Quick Start',
     quickStartLede: 'This is the entire mental model. There is no step you are not seeing.',
     quickStartCta: 'Read the full guide',
-    quickStartCode: `import { Container, createToken } from 'tinydi';
+    quickStartCode: `import { Container, createToken } from 'tinydi-container';
 
 interface IGreeter {
   greet(name: string): string;
@@ -139,7 +139,7 @@ console.log(greeter.greet('TinyDI'));`,
     quickStartLede:
       'Questo è l’intero modello mentale. Non c’è nessun passaggio che non stai vedendo.',
     quickStartCta: 'Leggi la guida completa',
-    quickStartCode: `import { Container, createToken } from 'tinydi';
+    quickStartCode: `import { Container, createToken } from 'tinydi-container';
 
 interface IGreeter {
   greet(name: string): string;

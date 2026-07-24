@@ -7,7 +7,7 @@
     "start": "tsx server.ts"
   },
   "dependencies": {
-    "tinydi": "file:../.."
+    "tinydi-container": "file:../.."
   },
   "devDependencies": {
     "tsx": "^4.23.1",

@@ -1,4 +1,4 @@
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 import type { IUserRepository } from './user-repository.js';
 import { UserRepository } from './user-repository.js';
 import { UserService } from './user-service.js';

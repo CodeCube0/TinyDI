@@ -48,7 +48,7 @@ This repository follows [Conventional Commits](https://www.conventionalcommits.o
 
 ## Changesets (versioning)
 
-This project uses [Changesets](https://github.com/changesets/changesets) to manage versioning and `CHANGELOG.md`. If your PR changes the published behavior of the `tinydi` package (anything under `src/`), add a changeset:
+This project uses [Changesets](https://github.com/changesets/changesets) to manage versioning and `CHANGELOG.md`. If your PR changes the published behavior of the `tinydi-container` package (anything under `src/`), add a changeset:
 
 ```bash
 npx changeset

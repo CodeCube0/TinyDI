@@ -1,4 +1,4 @@
-import { createToken } from 'tinydi';
+import { createToken } from 'tinydi-container';
 
 export interface IGreeter {
   greet(name: string): string;

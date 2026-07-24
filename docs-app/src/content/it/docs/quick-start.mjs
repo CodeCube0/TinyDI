@@ -4,7 +4,7 @@ export const meta = {
     "Registra il tuo primo servizio e risolvilo — l'intero modello mentale di TinyDI in una pagina.",
 };
 
-const fullExample = `import { Container, createToken, ServiceLifetime } from 'tinydi';
+const fullExample = `import { Container, createToken, ServiceLifetime } from 'tinydi-container';
 
 interface IClock {
   now(): Date;

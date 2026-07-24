@@ -1,4 +1,4 @@
-import type { Token } from 'tinydi';
+import type { Token } from 'tinydi-container';
 
 /**
  * Resolves a service from the container provided by `plugins/di.ts`. Can be

@@ -7,13 +7,13 @@ export const meta = {
 export const blocks = [
   {
     type: 'p',
-    html: 'TinyDI viene distribuito come un unico pacchetto ESM con zero dipendenze a runtime. Installalo con il package manager che preferisci.',
+    html: 'TinyDI viene distribuito come un unico pacchetto con zero dipendenze a runtime. Installalo con il package manager che preferisci.',
   },
   { type: 'heading', level: 2, id: 'npm-install', text: 'Installazione via npm' },
-  { type: 'code', lang: 'bash', code: 'npm install tinydi' },
+  { type: 'code', lang: 'bash', code: 'npm install tinydi-container' },
   {
     type: 'p',
-    html: "Lo stesso pacchetto funziona con <code>pnpm add tinydi</code>, <code>yarn add tinydi</code> o <code>bun add tinydi</code> — non c'è nulla di specifico per npm.",
+    html: "Lo stesso pacchetto funziona con <code>pnpm add tinydi-container</code>, <code>yarn add tinydi-container</code> o <code>bun add tinydi-container</code> — non c'è nulla di specifico per npm.",
   },
   { type: 'heading', level: 2, id: 'requirements', text: 'Requisiti' },
   {
@@ -28,16 +28,16 @@ export const blocks = [
     type: 'callout',
     kind: 'tip',
     title: "Nient'altro da installare",
-    html: 'TinyDI ha zero dipendenze a runtime. Dopo averlo installato, <code>npm ls tinydi</code> non porta nulla oltre al pacchetto stesso.',
+    html: 'TinyDI ha zero dipendenze a runtime. Dopo averlo installato, <code>npm ls tinydi-container</code> non porta nulla oltre al pacchetto stesso.',
   },
   { type: 'heading', level: 2, id: 'module-format', text: 'Formato dei moduli' },
   {
     type: 'p',
-    html: 'TinyDI viene distribuito solo come ESM (<code>"type": "module"</code>), tree-shakable, con un unico entry point che esporta tutto ciò che serve: <code>Container</code>, <code>createToken</code>, <code>ServiceLifetime</code> e le classi di errore.',
+    html: 'TinyDI viene distribuito come pacchetto dual ESM/CommonJS (costruito con <code>tsup</code>), tree-shakable, con un unico entry point che esporta tutto ciò che serve: <code>Container</code>, <code>createToken</code>, <code>ServiceLifetime</code> e le classi di errore.',
   },
   {
     type: 'code',
     lang: 'ts',
-    code: "import { Container, createToken, ServiceLifetime } from 'tinydi';",
+    code: "import { Container, createToken, ServiceLifetime } from 'tinydi-container';",
   },
 ];

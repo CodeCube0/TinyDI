@@ -1,5 +1,5 @@
 {
-  "name": "tinydi",
+  "name": "tinydi-container",
   "version": "0.1.1",
   "description": "A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.",
   "type": "module",
@@ -14,6 +14,7 @@
     "url": "https://github.com/CodeCube0/TinyDI/issues"
   },
   "keywords": [
+    "tinydi",
     "dependency-injection",
     "di",
     "ioc",
@@ -45,7 +46,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "provenance": false
+    "provenance": true
   },
   "peerDependencies": {
     "typescript": ">=6.0.0"

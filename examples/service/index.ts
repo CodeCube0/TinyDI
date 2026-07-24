@@ -1,4 +1,4 @@
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 import { GraphApiMailService, NoOpMailService, type IMailService } from './mail-service.js';
 
 const MailServiceToken = createToken<IMailService>('MailService');

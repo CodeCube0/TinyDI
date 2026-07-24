@@ -1,5 +1,5 @@
 import { inject, type App, type InjectionKey } from 'vue';
-import type { Container, Token } from 'tinydi';
+import type { Container, Token } from 'tinydi-container';
 
 const ContainerKey: InjectionKey<Container> = Symbol('tinydi-container');
 

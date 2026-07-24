@@ -1,4 +1,4 @@
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 import { ConsoleLogger, type ILogger } from './logger.js';
 import { InMemoryTaskRepository, type ITaskRepository } from './task-repository.js';
 import { TaskService } from './task-service.js';

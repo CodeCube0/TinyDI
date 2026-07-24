@@ -1,5 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
-import type { Container, Token } from 'tinydi';
+import type { Container, Token } from 'tinydi-container';
 
 const ContainerContext = createContext<Container | null>(null);
 

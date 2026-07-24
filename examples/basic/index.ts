@@ -1,4 +1,4 @@
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 
 /**
  * The minimum you need to understand TinyDI: define a service interface,

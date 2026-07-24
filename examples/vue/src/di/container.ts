@@ -1,4 +1,4 @@
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 import { EnglishGreeter, type IGreeter } from './greeter.js';
 
 export const GreeterToken = createToken<IGreeter>('Greeter');

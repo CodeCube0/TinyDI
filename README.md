@@ -9,7 +9,7 @@ A minimal, type-safe, decorator-free Dependency Injection container for TypeScri
 TinyDI is a small Dependency Injection (DI) container for TypeScript, Node.js, Bun, Deno and modern browsers. It gives you a `Container` you register services on and resolve them from, with full type inference and zero runtime dependencies — no reflection, no decorators, no metadata, no automatic constructor injection.
 
 ```ts
-import { Container, createToken } from 'tinydi';
+import { Container, createToken } from 'tinydi-container';
 
 interface IGreeter {
   greet(name: string): string;
@@ -57,7 +57,7 @@ Every service is registered explicitly with `registerInstance` or `registerFacto
 ## Installation
 
 ```bash
-npm install tinydi
+npm install tinydi-container
 ```
 
 TinyDI ships as ESM, tree-shakable, with full TypeScript type declarations. It targets Node.js, Bun, Deno and modern browsers, and requires **TypeScript 6.0 or later** if you consume its types (the compiled JavaScript output has no such requirement).
@@ -65,7 +65,7 @@ TinyDI ships as ESM, tree-shakable, with full TypeScript type declarations. It t
 ## Quick Start
 
 ```ts
-import { Container, createToken, ServiceLifetime } from 'tinydi';
+import { Container, createToken, ServiceLifetime } from 'tinydi-container';
 
 interface IClock {
   now(): Date;

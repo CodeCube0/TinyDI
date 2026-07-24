@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "tinydi": "file:../..",
+    "tinydi-container": "file:../..",
     "vue": "^3.5.40"
   },
   "devDependencies": {

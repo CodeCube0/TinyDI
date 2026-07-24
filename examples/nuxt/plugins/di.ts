@@ -1,4 +1,4 @@
-import { Container } from 'tinydi';
+import { Container } from 'tinydi-container';
 import { EnglishGreeter, GreeterToken } from '../services/greeter';
 
 /**
