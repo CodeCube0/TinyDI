@@ -1,18 +1,18 @@
 import { icon } from '../lib/icons.mjs';
 import { resolutionGraphSvg } from '../lib/graph-diagram.mjs';
 import { highlightToLines } from '../lib/highlight.mjs';
-import { docsHref } from '../nav.mjs';
+import { docsHref, LIBRARY_VERSION } from '../nav.mjs';
 
 const COPY = {
   en: {
-    eyebrow: 'v0.1.0 · Zero dependencies',
+    eyebrow: 'Zero dependencies',
     heroTitleMain: 'Modern Type-Safe Dependency Injection ',
     heroTitleAccent: 'Without Reflection',
     heroLede:
       'A minimal, type-safe, decorator-free Dependency Injection container for TypeScript. No reflection. No decorators. No metadata. Just explicit code you can read top to bottom.',
     ctaPrimary: 'Get Started',
     ctaSecondary: 'View on GitHub',
-    heroMeta: ['Zero runtime dependencies', 'TypeScript strict', 'ESM, tree-shakable'],
+    heroMeta: ['Zero runtime dependencies', 'TypeScript strict', 'ESM & CJS, tree-shakable'],
     featuresTitle: 'Explicit over magic',
     featuresLede:
       'Every trade-off TinyDI makes is deliberate. Here is exactly what you get, stated plainly.',
@@ -82,14 +82,14 @@ const greeter = container.resolve(GreeterToken); // typed as IGreeter
 console.log(greeter.greet('TinyDI'));`,
   },
   it: {
-    eyebrow: 'v0.1.0 · Zero dipendenze',
+    eyebrow: 'Zero dipendenze',
     heroTitleMain: 'Dependency Injection Moderna e Type-Safe, ',
     heroTitleAccent: 'Senza Reflection',
     heroLede:
       'Un container di Dependency Injection per TypeScript minimale, type-safe e senza decorator. Niente reflection. Niente decorator. Niente metadata. Solo codice esplicito, leggibile dall’inizio alla fine.',
     ctaPrimary: 'Inizia ora',
     ctaSecondary: 'Vedi su GitHub',
-    heroMeta: ['Zero dipendenze a runtime', 'TypeScript strict', 'ESM, tree-shakable'],
+    heroMeta: ['Zero dipendenze a runtime', 'TypeScript strict', 'ESM & CJS, tree-shakable'],
     featuresTitle: 'Explicit over magic',
     featuresLede:
       'Ogni compromesso di TinyDI è deliberato. Ecco esattamente cosa ottieni, detto senza fronzoli.',
@@ -166,7 +166,7 @@ function heroSection(lang, c) {
   <section class="hero">
     <div class="container hero__inner">
       <div>
-        <span class="hero__eyebrow">${c.eyebrow}</span>
+        <span class="hero__eyebrow">v${LIBRARY_VERSION} · ${c.eyebrow}</span>
         <h1>${c.heroTitleMain}<span class="hero__accent">${c.heroTitleAccent}</span></h1>
         <p class="hero__lede">${c.heroLede}</p>
         <div class="hero__actions">

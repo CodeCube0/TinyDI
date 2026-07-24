@@ -1,3 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Read directly from the core package's package.json (not duplicated here)
+// so the version shown on the site (homepage hero eyebrow) can never drift
+// from what's actually published on npm — it's derived at build time, not
+// hand-typed.
+const rootPkgPath = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'package.json');
+export const LIBRARY_VERSION = JSON.parse(readFileSync(rootPkgPath, 'utf8')).version;
+
 // Placeholder production origin, used only to build absolute hreflang/canonical
 // URLs. TinyDI has not been assigned a real domain yet (that's Phase 4 scope,
 // see reports/03-docs-website.md) — replace this once one exists. Overridable
