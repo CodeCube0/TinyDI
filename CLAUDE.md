@@ -38,7 +38,7 @@ npm start                     # basic, service, repository-pattern, node-backend
 npm run dev                   # vue, nuxt, react (dev server)
 ```
 
-`examples/**` is excluded from the root `eslint.config.js` and has no lint config of its own — each example only type-checks via its own `tsconfig.json` (`vue-tsc` for the Vue example, plain `tsc` for React/Node ones, Nuxt's generated `.nuxt/tsconfig.json` for Nuxt). Each example's `package-lock.json` **is** committed (unlike the root's, which is gitignored) so the exact dependency set that was verified to work stays reproducible.
+`examples/**` is excluded from the root `eslint.config.js` and has no lint config of its own — each example only type-checks via its own `tsconfig.json` (`vue-tsc` for the Vue example, plain `tsc` for React/Node ones, Nuxt's generated `.nuxt/tsconfig.json` for Nuxt). Each example's `package-lock.json` is committed, same as the root's (see below), so the exact dependency set that was verified to work stays reproducible.
 
 ### Running the docs site
 
@@ -97,6 +97,7 @@ Everything lives in `src/`, one concern per file, wired together in `src/index.t
 - `eslint.config.js` and `vitest.config.ts` are deliberately excluded from typed linting (`*.config.js`/`*.config.ts` override with `disableTypeChecked`) because they aren't covered by `tsconfig.json`'s `include`. `tsconfig.json` (base, no `rootDir`) covers `src` + `tests` for editor/lint/type-check; `tsconfig.build.json` adds `rootDir: "src"` and excludes tests, and is what `npm run build` actually uses to emit `dist/`.
 - `examples/**` is in the root `eslint.config.js` `ignores` list. Without it, `npm run lint`'s `projectService: true` tries to type-check every example's own `dist`/`.output`/`.nuxt` build artifacts too (they aren't covered by any `tsconfig.json`), producing hundreds of parse errors unrelated to the core.
 - Coverage target is >95%; the current suite is at 100% on all `src/*.ts` (excluding `index.ts`, which is pure re-exports).
+- The root `package-lock.json` is committed (as of Phase 4) — it used to be gitignored, but `.github/workflows/*.yml`'s `actions/setup-node@v4` (`cache: npm`) and every `npm ci` step need a real, checked-out lockfile to work at all; without one, every CI/release job fails immediately at the `setup-node` step. Same reproducibility rationale as `examples/*`'s and `docs-app`'s already-committed lockfiles.
 
 ## Repository layout notes
 
