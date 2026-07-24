@@ -2,6 +2,8 @@
 
 A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.
 
+[![npm version](https://img.shields.io/npm/v/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
+[![npm downloads](https://img.shields.io/npm/dm/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 ## Introduction
