@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+### Patch Changes
+
+- cbefc5b: Update `package.json`'s `homepage` field to point to the published documentation site (https://codecube0.github.io/TinyDI/) instead of the GitHub README anchor.
+
 ## 0.1.2
 
 ### Patch Changes
