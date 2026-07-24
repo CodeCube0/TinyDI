@@ -9,6 +9,9 @@ dist
 .cache
 *.tsbuildinfo
 
+# Generated TypeDoc API reference (npm run docs:api)
+/api-docs
+
 # Test / coverage
 coverage
 .vitest

@@ -1,0 +1,42 @@
+name: Bug Report
+description: Report something in TinyDI that isn't working as documented
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Given TinyDI's small API surface, a minimal reproduction goes a long way.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A small code snippet (token/registration/resolve calls) that reproduces the issue.
+      render: typescript
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: TinyDI version
+      placeholder: e.g. 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: e.g. Node 20.11, TypeScript 5.9, or a browser + framework (Vue/React/Nuxt) if relevant
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Stack traces, logs, or context that might help.

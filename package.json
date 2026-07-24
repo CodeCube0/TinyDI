@@ -4,14 +4,37 @@
   "description": "A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.",
   "type": "module",
   "license": "MIT",
+  "author": "CodeCube0",
+  "homepage": "https://github.com/CodeCube0/TinyDI#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeCube0/TinyDI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CodeCube0/TinyDI/issues"
+  },
+  "keywords": [
+    "dependency-injection",
+    "di",
+    "ioc",
+    "container",
+    "typescript",
+    "inversion-of-control"
+  ],
   "sideEffects": false,
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "files": [
@@ -19,6 +42,10 @@
   ],
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "peerDependencies": {
     "typescript": ">=6.0.0"
@@ -29,21 +56,30 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "docs:api": "typedoc",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.1",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^9.0.0",
     "@vitest/coverage-v8": "^3.0.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.0",
+    "tsup": "^8.5.1",
+    "typedoc": "^0.28.20",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.0.0",
     "vitest": "^3.0.0"
