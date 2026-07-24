@@ -1,0 +1,17 @@
+{
+  "name": "tinydi-docs-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "TinyDI documentation and project site — static HTML/CSS/JS, no frontend framework.",
+  "scripts": {
+    "postinstall": "node tools/copy-fonts.mjs",
+    "build": "node build.mjs",
+    "serve": "node serve.mjs",
+    "dev": "npm run build && node serve.mjs"
+  },
+  "devDependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/spline-sans-mono": "^5.3.0"
+  }
+}

@@ -44,3 +44,10 @@ storybook-static
 # Internal task specs and phase reports — not meant to be pushed
 /task
 /reports
+
+# Session working log — local resume notes, not meant to be pushed
+/RESUME.md
+
+# Self-hosted docs-app fonts, copied from node_modules by `npm install`
+# (postinstall) — regenerable, not hand-authored assets.
+docs-app/src/assets/fonts
