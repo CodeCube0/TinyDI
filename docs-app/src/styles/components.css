@@ -636,6 +636,7 @@ dialog.docs-drawer::backdrop {
   margin-bottom: var(--space-12);
 }
 
+.section__head h1,
 .section__head h2 {
   margin-bottom: var(--space-4);
 }
@@ -1265,4 +1266,94 @@ dialog.search-dialog::backdrop {
 
 .site-footer__links a:hover {
   color: var(--ink);
+}
+
+/* ===== Blog ===== */
+
+.post-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  margin-top: var(--space-8);
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition:
+    border-color var(--duration-fast) var(--ease-out-expo),
+    transform var(--duration-fast) var(--ease-out-expo);
+}
+
+.post-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.post-card h2 {
+  font-size: var(--text-lg);
+}
+
+.post-card p {
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  flex-grow: 1;
+}
+
+.post-card__meta,
+.post-header__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+}
+
+.post-header__meta {
+  margin-block: var(--space-4) var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: var(--text-sm);
+  color: var(--accent);
+}
+
+/* A blog post's .post-tags sits inside .post.docs-content, whose list
+   typography rules (.docs-content ul, .docs-content li + li) are more
+   specific than the plain .post-tags/.post-tag selectors above and would
+   otherwise win: disc markers reappear and the second tag gets pushed down
+   by a stray margin-top. Re-assert the three clobbered properties at higher
+   specificity instead of fighting source order. */
+.docs-content .post-tags {
+  list-style: none;
+  padding-left: 0;
+}
+
+.docs-content .post-tags .post-tag {
+  margin-top: 0;
+}
+
+.post {
+  max-width: var(--measure);
+  margin-inline: auto;
 }

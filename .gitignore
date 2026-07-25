@@ -53,3 +53,4 @@ storybook-static
 # Self-hosted docs-app fonts, copied from node_modules by `npm install`
 # (postinstall) — regenerable, not hand-authored assets.
 docs-app/src/assets/fonts
+/LINKEDIN.md

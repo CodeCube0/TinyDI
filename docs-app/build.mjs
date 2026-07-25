@@ -7,8 +7,18 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { renderLayout } from './src/templates/layout.mjs';
 import { renderHome } from './src/templates/home.mjs';
+import { renderBlogIndexBody, renderPostMeta } from './src/templates/blog.mjs';
 import { renderBlocks } from './src/lib/blocks.mjs';
-import { docsNav, docsHref, homeHref, SITE_URL, BASE_PATH } from './src/nav.mjs';
+import {
+  docsNav,
+  docsHref,
+  homeHref,
+  blogPosts,
+  blogHref,
+  blogIndexHref,
+  SITE_URL,
+  BASE_PATH,
+} from './src/nav.mjs';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const distDir = join(rootDir, 'dist');
@@ -52,6 +62,14 @@ function homeFilePath(lang) {
   return lang === 'en' ? 'index.html' : 'it/index.html';
 }
 
+function blogFilePath(lang, id) {
+  return lang === 'en' ? `blog/${id}.html` : `it/blog/${id}.html`;
+}
+
+function blogIndexFilePath(lang) {
+  return lang === 'en' ? 'blog/index.html' : 'it/blog/index.html';
+}
+
 function extractToc(blocks) {
   return blocks
     .filter((b) => b.type === 'heading' && b.level === 2)
@@ -93,6 +111,70 @@ async function buildDocsPages(lang, searchEntries) {
   }
 }
 
+async function loadBlogPost(lang, id) {
+  const modUrl = pathToFileURL(join(rootDir, 'src/content', lang, 'blog', `${id}.mjs`)).href;
+  return import(modUrl);
+}
+
+// Posts newest-first, like a normal blog — Array#sort is stable, so posts
+// sharing the same date (all of phases 1-4 shipped the same day) keep the
+// order they're declared in blogPosts.
+function postsNewestFirst() {
+  return [...blogPosts].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+async function buildBlogPages(lang, searchEntries) {
+  const posts = postsNewestFirst();
+  const summaries = [];
+
+  for (const entry of posts) {
+    const mod = await loadBlogPost(lang, entry.id);
+    const { html, chunks } = renderBlocks(mod.blocks, lang);
+
+    const pageHtml = renderLayout({
+      lang,
+      pageId: entry.id,
+      title: mod.meta.title,
+      description: mod.meta.description,
+      section: 'blog',
+      bodyHtml: `<div class="container"><article class="post docs-content"><h1>${mod.meta.title}</h1>${renderPostMeta(lang, entry)}${html}</article></div>`,
+    });
+
+    write(blogFilePath(lang, entry.id), pageHtml);
+    summaries.push({ ...entry, title: mod.meta.title, description: mod.meta.description });
+
+    const pageUrl = blogHref(lang, entry.id);
+    for (const chunk of chunks) {
+      searchEntries.push({
+        url: chunk.id ? `${pageUrl}#${chunk.id}` : pageUrl,
+        page: mod.meta.title,
+        title: chunk.heading ?? mod.meta.title,
+        snippet: chunk.text.slice(0, 180),
+      });
+    }
+  }
+
+  const indexHtml = renderLayout({
+    lang,
+    pageId: null,
+    title: lang === 'en' ? 'Blog' : 'Blog',
+    description:
+      lang === 'en'
+        ? 'Engineering notes on how TinyDI was designed and built.'
+        : 'Note tecniche su come TinyDI è stato progettato e costruito.',
+    section: 'blog',
+    bodyHtml: renderBlogIndexBody(lang, summaries),
+  });
+  write(blogIndexFilePath(lang), indexHtml);
+
+  searchEntries.push({
+    url: blogIndexHref(lang),
+    page: 'Blog',
+    title: 'Blog',
+    snippet: summaries.map((p) => p.title).join('. '),
+  });
+}
+
 function buildHomePage(lang) {
   const isEn = lang === 'en';
   const title = isEn
@@ -123,6 +205,9 @@ function buildSitemap() {
     homeHref('en'),
     homeHref('it'),
     ...docsNav.flatMap((n) => [docsHref('en', n.id), docsHref('it', n.id)]),
+    blogIndexHref('en'),
+    blogIndexHref('it'),
+    ...blogPosts.flatMap((p) => [blogHref('en', p.id), blogHref('it', p.id)]),
   ];
   const entries = urls.map((u) => `  <url><loc>${SITE_URL}${u}</loc></url>`).join('\n');
   write(
@@ -146,12 +231,15 @@ async function main() {
   const searchEntriesIt = [];
   await buildDocsPages('en', searchEntriesEn);
   await buildDocsPages('it', searchEntriesIt);
+  await buildBlogPages('en', searchEntriesEn);
+  await buildBlogPages('it', searchEntriesIt);
   buildSearchIndex('en', searchEntriesEn);
   buildSearchIndex('it', searchEntriesIt);
 
   buildSitemap();
 
-  console.log(`Built ${docsNav.length * 2 + 2} pages into dist/`);
+  const pageCount = (docsNav.length + blogPosts.length + 1) * 2;
+  console.log(`Built ${pageCount} pages into dist/`);
 }
 
 main().catch((error) => {

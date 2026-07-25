@@ -49,6 +49,58 @@ export const docsNavGroups = [
   { key: 'adopt', en: 'Adopt', it: 'Adozione' },
 ];
 
+// Engineering-blog posts — one source of truth for post order (newest first,
+// see the sort in build.mjs), sitemap generation, and per-post metadata that
+// isn't itself content (date, tag keys). Title/description/body live in the
+// matching src/content/{en,it}/blog/<id>.mjs, same split as docsNav vs. the
+// doc content files. Same `id` (slug) is reused for both languages.
+export const blogPosts = [
+  { id: 'why-no-reflect-metadata', date: '2026-07-24', tags: ['architecture', 'dx'] },
+  {
+    id: 'type-safe-tokens-without-generics',
+    date: '2026-07-24',
+    tags: ['architecture', 'typescript'],
+  },
+  { id: 'detecting-circular-dependencies', date: '2026-07-24', tags: ['architecture', 'testing'] },
+  {
+    id: 'an-error-hierarchy-not-throw-new-error',
+    date: '2026-07-24',
+    tags: ['architecture', 'dx'],
+  },
+  { id: 'what-we-havent-built-yet', date: '2026-07-24', tags: ['architecture', 'roadmap'] },
+  { id: 'a-docs-site-without-a-framework', date: '2026-07-24', tags: ['tooling', 'dx'] },
+  { id: 'shipping-tinydi-to-npm', date: '2026-07-24', tags: ['tooling', 'dx'] },
+  {
+    id: 'what-the-phase-4-plan-couldnt-predict',
+    date: '2026-07-25',
+    tags: ['tooling', 'incident'],
+  },
+];
+
+// Localized labels for the tag keys used in blogPosts above — same pattern as
+// docsNavGroups (a stable key, a label per language), kept separate from the
+// post content files since tags are metadata about the post, not prose.
+export const blogTagLabels = {
+  en: {
+    architecture: 'Architecture',
+    dx: 'DX',
+    typescript: 'TypeScript',
+    testing: 'Testing',
+    roadmap: 'Roadmap',
+    tooling: 'Tooling',
+    incident: 'Postmortem',
+  },
+  it: {
+    architecture: 'Architettura',
+    dx: 'DX',
+    typescript: 'TypeScript',
+    testing: 'Testing',
+    roadmap: 'Roadmap',
+    tooling: 'Tooling',
+    incident: 'Post-mortem',
+  },
+};
+
 export const strings = {
   en: {
     htmlLang: 'en',
@@ -56,7 +108,14 @@ export const strings = {
     tagline: 'Modern Type-Safe Dependency Injection Without Reflection',
     navDocs: 'Docs',
     navExamples: 'Examples',
+    navBlog: 'Blog',
     navGithub: 'GitHub',
+    blogHeroTitle: 'Blog',
+    blogHeroLede:
+      'Engineering notes on how TinyDI was actually designed and built — real trade-offs, real dead ends, no marketing.',
+    blogPublishedOn: 'Published on',
+    blogReadPost: 'Read post',
+    blogAllPosts: 'All posts',
     searchLabel: 'Search',
     searchPlaceholder: 'Search docs, guides, examples…',
     searchEmpty: 'No results. Try a different term.',
@@ -81,7 +140,14 @@ export const strings = {
     tagline: 'Dependency Injection Moderna e Type-Safe, Senza Reflection',
     navDocs: 'Documentazione',
     navExamples: 'Esempi',
+    navBlog: 'Blog',
     navGithub: 'GitHub',
+    blogHeroTitle: 'Blog',
+    blogHeroLede:
+      'Note tecniche su come TinyDI è stato davvero progettato e costruito — trade-off reali, vicoli ciechi reali, senza marketing.',
+    blogPublishedOn: 'Pubblicato il',
+    blogReadPost: "Leggi l'articolo",
+    blogAllPosts: 'Tutti gli articoli',
     searchLabel: 'Cerca',
     searchPlaceholder: 'Cerca nella documentazione, guide, esempi…',
     searchEmpty: 'Nessun risultato. Prova un altro termine.',
@@ -110,6 +176,24 @@ export function homeHref(lang) {
   return lang === 'en' ? `${BASE_PATH}/` : `${BASE_PATH}/it/`;
 }
 
+export function blogIndexHref(lang) {
+  return lang === 'en' ? `${BASE_PATH}/blog/` : `${BASE_PATH}/it/blog/`;
+}
+
+export function blogHref(lang, id) {
+  return lang === 'en' ? `${BASE_PATH}/blog/${id}.html` : `${BASE_PATH}/it/blog/${id}.html`;
+}
+
 export function otherLang(lang) {
   return lang === 'en' ? 'it' : 'en';
+}
+
+// Single place that maps a (lang, section, pageId) triple to the page's
+// content-facing URL — used by both canonical/hreflang generation and the
+// language switcher, so a new section only has to teach this function its
+// href shape instead of every caller re-deriving it.
+export function resolveHref(lang, section, pageId) {
+  if (section === 'home') return homeHref(lang);
+  if (section === 'blog') return pageId ? blogHref(lang, pageId) : blogIndexHref(lang);
+  return docsHref(lang, pageId);
 }

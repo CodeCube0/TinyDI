@@ -4,6 +4,8 @@ import {
   strings,
   docsHref,
   homeHref,
+  blogIndexHref,
+  resolveHref,
   otherLang,
   SITE_URL,
   BASE_PATH,
@@ -38,9 +40,9 @@ function langBannerInitScript(bannerLang) {
 
 function head({ lang, pageId, title, description, section }) {
   const s = strings[lang];
-  const path = section === 'home' ? homeHref(lang) : docsHref(lang, pageId);
-  const enPath = section === 'home' ? homeHref('en') : docsHref('en', pageId);
-  const itPath = section === 'home' ? homeHref('it') : docsHref('it', pageId);
+  const path = resolveHref(lang, section, pageId);
+  const enPath = resolveHref('en', section, pageId);
+  const itPath = resolveHref('it', section, pageId);
   const fullTitle =
     section === 'home' ? `${s.siteName} — ${s.tagline}` : `${title} — ${s.siteName}`;
 
@@ -71,8 +73,8 @@ function head({ lang, pageId, title, description, section }) {
 
 function langSwitchMarkup(lang, pageId, section) {
   const targetId = section === 'home' ? null : pageId;
-  const enHref = section === 'home' ? homeHref('en') : docsHref('en', targetId);
-  const itHref = section === 'home' ? homeHref('it') : docsHref('it', targetId);
+  const enHref = resolveHref('en', section, targetId);
+  const itHref = resolveHref('it', section, targetId);
   return `
     <div class="lang-switch" role="group" aria-label="Language">
       <a href="${enHref}" data-lang-link="en" ${lang === 'en' ? 'aria-current="true"' : ''}>EN</a>
@@ -93,6 +95,7 @@ function headerMarkup({ lang, pageId, section }) {
       <nav class="site-header__nav" aria-label="Primary">
         <a href="${docsHref(lang, 'installation')}" ${isDocsActive ? 'aria-current="page"' : ''}>${s.navDocs}</a>
         <a href="${docsHref(lang, 'examples')}" ${pageId === 'examples' ? 'aria-current="page"' : ''}>${s.navExamples}</a>
+        <a href="${blogIndexHref(lang)}" ${section === 'blog' ? 'aria-current="page"' : ''}>${s.navBlog}</a>
         <a href="https://github.com/CodeCube0/TinyDI" target="_blank" rel="noopener">${s.navGithub} ${icon('externalLink')}</a>
       </nav>
       <div class="site-header__actions">
@@ -140,6 +143,7 @@ function drawerMarkup({ lang, pageId, section }) {
         <div class="docs-sidebar__group">
           <a class="docs-sidebar__link" href="${docsHref(lang, 'installation')}">${s.navDocs}</a>
           <a class="docs-sidebar__link" href="${docsHref(lang, 'examples')}">${s.navExamples}</a>
+          <a class="docs-sidebar__link" href="${blogIndexHref(lang)}">${s.navBlog}</a>
           <a class="docs-sidebar__link" href="https://github.com/CodeCube0/TinyDI" target="_blank" rel="noopener">${s.navGithub}</a>
         </div>
       </nav>
@@ -220,6 +224,7 @@ function footerMarkup(lang) {
       <nav class="site-footer__links" aria-label="Footer">
         <a href="${docsHref(lang, 'installation')}">${s.navDocs}</a>
         <a href="${docsHref(lang, 'examples')}">${s.navExamples}</a>
+        <a href="${blogIndexHref(lang)}">${s.navBlog}</a>
         <a href="https://github.com/CodeCube0/TinyDI" target="_blank" rel="noopener">${s.navGithub}</a>
       </nav>
     </div>
@@ -230,7 +235,7 @@ function footerMarkup(lang) {
  * Renders a full HTML page.
  * @param {{
  *   lang: 'en'|'it', pageId: string, title: string, description: string,
- *   section: 'home'|'docs', bodyHtml: string, tocItems?: {id:string,text:string}[]
+ *   section: 'home'|'docs'|'blog', bodyHtml: string, tocItems?: {id:string,text:string}[]
  * }} options
  */
 export function renderLayout(options) {
