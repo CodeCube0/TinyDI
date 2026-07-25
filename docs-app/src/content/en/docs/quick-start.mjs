@@ -55,20 +55,20 @@ export const blocks = [
         title: 'Tokens',
         description:
           'How the type-safe token system works, and why identity is a symbol, not a string.',
-        href: '/docs/tokens.html',
+        href: 'tokens.html',
         cta: 'Read Tokens',
       },
       {
         title: 'Container',
         description:
           'Every method on Container: registerInstance, registerFactory, resolve, has, remove, clear.',
-        href: '/docs/container.html',
+        href: 'container.html',
         cta: 'Read Container',
       },
       {
         title: 'Lifetimes',
         description: 'Singleton vs. Transient, and when to reach for each.',
-        href: '/docs/lifetimes.html',
+        href: 'lifetimes.html',
         cta: 'Read Lifetimes',
       },
     ],

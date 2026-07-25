@@ -92,7 +92,18 @@ Docs pages: persistent left sidebar (`--bp-lg`+) + content column capped at 68ch
 
 ## Motion
 
-`--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1)`, durations `--duration-fast: 150ms`, `--duration-base: 250ms`, `--duration-slow: 450ms`. One orchestrated hero entrance (staggered reveal + the architecture diagram drawing itself in); everything else (nav, theme/lang toggles, copy-button feedback) is a quick, single-property transition. Every animation has a `prefers-reduced-motion: reduce` fallback (instant state, no transition).
+`--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1)`, durations `--duration-fast: 150ms`, `--duration-base: 250ms`, `--duration-slow: 450ms`. One orchestrated hero entrance (staggered reveal + the architecture diagram drawing itself in) is the site's one authored focal moment — everything else stays quiet and functional:
+
+- **Quick single-property transitions** (`--duration-fast`, color/background/border only): header nav, sidebar/TOC links, language switch, icon buttons, code-block copy button — feedback on hover/focus/active-state, nothing decorative.
+- **Theme toggle**: the sun/moon icons cross-fade + rotate into each other (`--duration-base`) instead of an instant swap — the icon change is the only confirmation the click worked.
+- **Copy button feedback**: a brief accent-color tint + icon scale-pop on success (danger-color tint on failure), reverting after 1.8s. The button's icon and label are DOM nodes that are only ever text-swapped on the label, never destroyed and rebuilt — that guarantee is what makes the feedback state safe to animate.
+- **FAQ accordion**: panel height is animated via the Web Animations API (`scripts/faq.js`), since native `<details>` removes its content from layout the instant it closes and CSS alone has nothing to transition from. A `setTimeout` safety net guarantees the panel always settles to its final height even if the animation is throttled (e.g. the reader switches tabs mid-toggle) — a stalled animation must never leave the UI stuck.
+- **Search dialog**: fade + slight scale/drop-in entrance via `@starting-style`, a pure-CSS progressive enhancement (browsers without support just see the dialog appear instantly, i.e. today's behavior — no fallback branch needed). The mobile drawer keeps its own existing slide-in; a centered overlay and a side panel earn different motion, not the same one reused.
+- **Language banner**: only the user-triggered *dismiss* is animated (fade + slight rise, then removed from layout). The *initial appearance* is deliberately never animated — it's decided synchronously pre-paint (see `langBannerInitScript` in `templates/layout.mjs`) specifically so nothing shifts the layout on load; animating that reveal would reintroduce the exact bug that fix was written to prevent.
+
+Every animation has a `prefers-reduced-motion: reduce` fallback (instant state, no transition), including `::backdrop` and WAAPI-driven motion (checked explicitly in JS, since CSS's `transition-duration` override cannot reach `Element.animate()` calls).
+
+**Tried and deliberately not shipped:** cross-document View Transitions (`@view-transition { navigation: auto; }`) for continuity between page navigations. In testing it threw a real `AbortError`/`InvalidStateError` on every navigation in this environment — a visible console exception on every click is worse than no cross-page transition at all, so it was backed out rather than shipped with a known defect. Revisit if a future browser/engine pass proves it clean.
 
 ## Signature visual motif
 

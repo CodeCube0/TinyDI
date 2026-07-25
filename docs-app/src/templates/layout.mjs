@@ -1,4 +1,13 @@
-import { docsNav, strings, docsHref, homeHref, otherLang, SITE_URL, BASE_PATH } from '../nav.mjs';
+import {
+  docsNav,
+  docsNavGroups,
+  strings,
+  docsHref,
+  homeHref,
+  otherLang,
+  SITE_URL,
+  BASE_PATH,
+} from '../nav.mjs';
 import { icon } from '../lib/icons.mjs';
 
 function themeInitScript() {
@@ -120,15 +129,6 @@ function langBannerMarkup(lang) {
 
 function drawerMarkup({ lang, pageId, section }) {
   const s = strings[lang];
-  const sidebarLinks =
-    section === 'docs'
-      ? docsNav
-          .map(
-            (item) => `
-        <a class="docs-sidebar__link" href="${docsHref(lang, item.id)}" ${item.id === pageId ? 'aria-current="page"' : ''}>${item[lang]}</a>`,
-          )
-          .join('')
-      : '';
 
   return `
   <dialog class="docs-drawer" data-drawer aria-label="${s.docsMenuLabel}">
@@ -145,26 +145,36 @@ function drawerMarkup({ lang, pageId, section }) {
       </nav>
       ${
         section === 'docs'
-          ? `<nav aria-label="${s.docsMenuLabel}"><div class="docs-sidebar__group"><p class="docs-sidebar__group-title">${s.navDocs}</p>${sidebarLinks}</div></nav>`
+          ? `<nav aria-label="${s.docsMenuLabel}">${docsGroupsMarkup(lang, pageId)}</nav>`
           : ''
       }
     </div>
   </dialog>`;
 }
 
-function sidebarMarkup(lang, pageId) {
-  const links = docsNav
-    .map(
-      (item) => `
-    <a class="docs-sidebar__link" href="${docsHref(lang, item.id)}" ${item.id === pageId ? 'aria-current="page"' : ''}>${item[lang]}</a>`,
-    )
+function docsGroupsMarkup(lang, pageId) {
+  return docsNavGroups
+    .map((group) => {
+      const links = docsNav
+        .filter((item) => item.group === group.key)
+        .map(
+          (item) => `
+        <a class="docs-sidebar__link" href="${docsHref(lang, item.id)}" ${item.id === pageId ? 'aria-current="page"' : ''}>${item[lang]}</a>`,
+        )
+        .join('');
+      return `
+    <div class="docs-sidebar__group">
+      <p class="docs-sidebar__group-title">${group[lang]}</p>
+      ${links}
+    </div>`;
+    })
     .join('');
+}
+
+function sidebarMarkup(lang, pageId) {
   return `
   <nav class="docs-sidebar" aria-label="${strings[lang].docsMenuLabel}">
-    <div class="docs-sidebar__group">
-      <p class="docs-sidebar__group-title">${strings[lang].navDocs}</p>
-      ${links}
-    </div>
+    ${docsGroupsMarkup(lang, pageId)}
   </nav>`;
 }
 
@@ -255,6 +265,7 @@ ${head(options)}
   <script src="${BASE_PATH}/scripts/code-block.js" defer></script>
   <script src="${BASE_PATH}/scripts/search.js" defer></script>
   <script src="${BASE_PATH}/scripts/lang.js" defer></script>
+  <script src="${BASE_PATH}/scripts/faq.js" defer></script>
 </body>
 </html>`;
 }

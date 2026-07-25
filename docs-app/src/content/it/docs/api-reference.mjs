@@ -14,7 +14,7 @@ export const blocks = [
   { type: 'code', lang: 'ts', code: 'function createToken<T>(description: string): Token<T>' },
   {
     type: 'p',
-    html: "<strong>Parametri:</strong> <code>description</code> — un'etichetta leggibile usata nei messaggi di errore. Non deve essere univoca.<br><strong>Restituisce:</strong> un <code>Token&lt;T&gt;</code>, utilizzabile con <code>registerInstance</code>, <code>registerFactory</code> e <code>resolve</code>.",
+    html: "<strong>Parametri:</strong> <code>description</code>: un'etichetta leggibile usata nei messaggi di errore. Non deve essere univoca.<br><strong>Restituisce:</strong> un <code>Token&lt;T&gt;</code>, utilizzabile con <code>registerInstance</code>, <code>registerFactory</code> e <code>resolve</code>.",
   },
   {
     type: 'code',
@@ -43,7 +43,7 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: 'Esistono solo questi due valori. <code>Singleton</code> è il default usato da <code>registerFactory</code> quando non viene fornito alcun lifetime. Vedi <a href="/it/docs/lifetimes.html">Lifetime</a> per la spiegazione completa.',
+    html: 'Esistono solo questi due valori. <code>Singleton</code> è il default usato da <code>registerFactory</code> quando non viene fornito alcun lifetime. Vedi <a href="lifetimes.html">Lifetime</a> per la spiegazione completa.',
   },
 
   { type: 'heading', level: 2, id: 'container', text: 'Container' },
@@ -74,7 +74,7 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: "<strong>Parametri:</strong> <code>token</code> — l'identificatore del servizio; <code>instance</code> — il valore restituito ad ogni risoluzione.<br><strong>Restituisce:</strong> <code>void</code>.<br><strong>Lancia:</strong> <code>RegistrationError</code> se <code>token</code> è già registrato.",
+    html: "<strong>Parametri:</strong> <code>token</code>: l'identificatore del servizio; <code>instance</code>: il valore restituito ad ogni risoluzione.<br><strong>Restituisce:</strong> <code>void</code>.<br><strong>Lancia:</strong> <code>RegistrationError</code> se <code>token</code> è già registrato.",
   },
 
   { type: 'heading', level: 3, id: 'registerfactory', text: 'registerFactory' },
@@ -85,14 +85,14 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: "<strong>Parametri:</strong> <code>token</code> — l'identificatore del servizio; <code>factory</code> — costruisce l'istanza, ricevendo il container così può risolvere le proprie dipendenze; <code>lifetime</code> — <code>Singleton</code> (default) o <code>Transient</code>.<br><strong>Restituisce:</strong> <code>void</code>.<br><strong>Lancia:</strong> <code>RegistrationError</code> se <code>token</code> è già registrato.",
+    html: "<strong>Parametri:</strong> <code>token</code>: l'identificatore del servizio; <code>factory</code>: costruisce l'istanza, ricevendo il container così può risolvere le proprie dipendenze; <code>lifetime</code>: <code>Singleton</code> (default) o <code>Transient</code>.<br><strong>Restituisce:</strong> <code>void</code>.<br><strong>Lancia:</strong> <code>RegistrationError</code> se <code>token</code> è già registrato.",
   },
 
   { type: 'heading', level: 3, id: 'resolve', text: 'resolve' },
   { type: 'code', lang: 'ts', code: 'resolve<T>(token: Token<T>): T' },
   {
     type: 'p',
-    html: "<strong>Parametri:</strong> <code>token</code> — l'identificatore del servizio da risolvere.<br><strong>Restituisce:</strong> l'istanza risolta, tipizzata come <code>T</code>.<br><strong>Lancia:</strong> <code>ResolutionError</code> se non registrato; <code>CircularDependencyError</code> se risolverlo richiede di risolvere se stesso di nuovo, direttamente o transitivamente.",
+    html: "<strong>Parametri:</strong> <code>token</code>: l'identificatore del servizio da risolvere.<br><strong>Restituisce:</strong> l'istanza risolta, tipizzata come <code>T</code>.<br><strong>Lancia:</strong> <code>ResolutionError</code> se non registrato; <code>CircularDependencyError</code> se risolverlo richiede di risolvere se stesso di nuovo, direttamente o transitivamente.",
   },
 
   { type: 'heading', level: 3, id: 'has-remove-clear', text: 'has / remove / clear' },
@@ -115,14 +115,27 @@ clear(): void`,
   },
   {
     type: 'api-table',
-    headers: ['Classe', 'Lanciato quando'],
+    headers: ['Classe', 'Lanciato quando', 'Come risolvere'],
     rows: [
-      ['<code>ContainerError</code>', 'Classe base astratta. Mai lanciata direttamente.'],
-      ['<code>RegistrationError</code>', 'Si registra un token già registrato.'],
-      ['<code>ResolutionError</code>', 'Si risolve un token senza registrazione.'],
+      [
+        '<code>ContainerError</code>',
+        'Classe base astratta. Mai lanciata direttamente.',
+        "Intercettala per gestire in modo generico qualsiasi errore del container, con <code>instanceof ContainerError</code>.",
+      ],
+      [
+        '<code>RegistrationError</code>',
+        'Si registra un token già registrato.',
+        'Chiama <code>remove(token)</code> prima di ri-registrarlo, oppure registra la nuova implementazione sotto un token diverso.',
+      ],
+      [
+        '<code>ResolutionError</code>',
+        'Si risolve un token senza registrazione.',
+        "Controlla se il riferimento al token contiene un errore di battitura, se manca una chiamata a <code>registerInstance</code>/<code>registerFactory</code>, o se <code>resolve()</code> viene eseguito prima che la registrazione avvenga.",
+      ],
       [
         '<code>CircularDependencyError</code>',
         'Si risolve un token che dipende (transitivamente) da se stesso.',
+        "Leggi <code>.path</code> per vedere il ciclo esatto, poi spezzalo — estrai la logica condivisa da entrambi i servizi in un terzo servizio, oppure risolvi la dipendenza in modo lazy dentro la factory invece che in modo eager alla costruzione.",
       ],
     ],
   },

@@ -27,15 +27,26 @@ export const BASE_PATH = process.env.DOCS_BASE_PATH ?? '';
 // Shared nav model — one source of truth for the sidebar, the search index
 // page grouping, and the header's primary nav.
 export const docsNav = [
-  { id: 'installation', en: 'Installation', it: 'Installazione' },
-  { id: 'quick-start', en: 'Quick Start', it: 'Quick Start' },
-  { id: 'tokens', en: 'Tokens', it: 'Token' },
-  { id: 'container', en: 'Container', it: 'Container' },
-  { id: 'lifetimes', en: 'Lifetimes', it: 'Lifetime' },
-  { id: 'api-reference', en: 'API Reference', it: 'API Reference' },
-  { id: 'examples', en: 'Examples', it: 'Esempi' },
-  { id: 'faq', en: 'FAQ', it: 'FAQ' },
-  { id: 'comparison', en: 'Comparison', it: 'Confronto' },
+  { id: 'installation', en: 'Installation', it: 'Installazione', group: 'guide' },
+  { id: 'quick-start', en: 'Quick Start', it: 'Quick Start', group: 'guide' },
+  { id: 'tokens', en: 'Tokens', it: 'Token', group: 'guide' },
+  { id: 'container', en: 'Container', it: 'Container', group: 'guide' },
+  { id: 'lifetimes', en: 'Lifetimes', it: 'Lifetime', group: 'guide' },
+  { id: 'testing', en: 'Testing', it: 'Testing', group: 'guide' },
+  { id: 'api-reference', en: 'API Reference', it: 'API Reference', group: 'reference' },
+  { id: 'examples', en: 'Examples', it: 'Esempi', group: 'adopt' },
+  { id: 'faq', en: 'FAQ', it: 'FAQ', group: 'adopt' },
+  { id: 'comparison', en: 'Comparison', it: 'Confronto', group: 'adopt' },
+];
+
+// Groups the flat docsNav list into labeled sidebar/drawer clusters — the
+// content already splits into "get going", "look something up", and "decide
+// to adopt"; this just makes that split visible instead of one undifferentiated
+// 9-item list.
+export const docsNavGroups = [
+  { key: 'guide', en: 'Guide', it: 'Guida' },
+  { key: 'reference', en: 'Reference', it: 'Riferimento' },
+  { key: 'adopt', en: 'Adopt', it: 'Adozione' },
 ];
 
 export const strings = {

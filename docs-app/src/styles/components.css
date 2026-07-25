@@ -103,7 +103,9 @@
   color: var(--ink-muted);
   padding: var(--space-2) 0;
   border-bottom: 2px solid transparent;
-  transition: color var(--duration-fast) var(--ease-out-expo);
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    border-bottom-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .site-header__nav a svg {
@@ -166,6 +168,9 @@
   color: var(--ink-muted);
   border: 1px solid transparent;
   font-size: var(--text-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .icon-btn:hover {
@@ -221,14 +226,32 @@
   }
 }
 
-.theme-toggle svg {
-  transition: transform var(--duration-base) var(--ease-out-expo);
+.theme-toggle {
+  position: relative;
+  width: 2.25rem;
 }
 
-/* Show/hide sun/moon icon based on active theme */
-:root[data-theme='dark'] .theme-toggle .icon-sun,
+.theme-toggle svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+/* Cross-fade + rotate between sun/moon on theme change, instead of an
+   instant display:none swap — the icon change is the only signal the
+   toggle click actually worked. */
+:root[data-theme='dark'] .theme-toggle .icon-sun {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+}
+
 :root[data-theme='light'] .theme-toggle .icon-moon {
-  display: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
 }
 
 /* ===== Language switch ===== */
@@ -248,6 +271,9 @@
   color: var(--ink-muted);
   text-transform: uppercase;
   letter-spacing: 0.02em;
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .lang-switch a[aria-current='true'] {
@@ -269,6 +295,7 @@
 }
 
 .docs-sidebar {
+  display: none;
   border-right: none;
 }
 
@@ -292,6 +319,9 @@
   font-size: var(--text-sm);
   color: var(--ink-muted);
   border-left: none;
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .docs-sidebar__link:hover {
@@ -365,6 +395,9 @@
   color: var(--ink-muted);
   border-left: 2px solid transparent;
   padding-left: var(--space-3);
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    border-left-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .docs-toc a:hover,
@@ -378,14 +411,12 @@
     grid-template-columns: 15rem minmax(0, 1fr);
   }
   .docs-sidebar {
+    display: block;
     position: sticky;
     top: 5.5rem;
     align-self: start;
     max-height: calc(100vh - 6rem);
     overflow-y: auto;
-  }
-  .docs-sidebar--mobile {
-    display: none;
   }
 }
 
@@ -656,6 +687,10 @@ dialog.docs-drawer::backdrop {
   color: var(--accent-ink);
 }
 
+.feature--headline h3 {
+  color: var(--accent-ink);
+}
+
 .feature--headline p {
   color: color-mix(in oklch, var(--accent-ink) 78%, transparent);
 }
@@ -688,6 +723,19 @@ dialog.docs-drawer::backdrop {
 
 [data-lang-banner] {
   display: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+/* Dismissal (a user action) is animated; the initial appearance is not — it
+   is decided synchronously pre-paint (see langBannerInitScript in
+   layout.mjs) specifically so nothing shifts the layout on load. Adding a
+   reveal transition here would reintroduce that exact bug in reverse. */
+[data-lang-banner].is-dismissing {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
 }
 
 :root[data-lang-banner-show] [data-lang-banner] {
@@ -766,6 +814,9 @@ dialog.docs-drawer::backdrop {
   color: var(--ink-muted);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
+  transition:
+    color var(--duration-fast) var(--ease-out-expo),
+    background-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .code-block__copy:hover {
@@ -776,6 +827,21 @@ dialog.docs-drawer::backdrop {
 .code-block__copy svg {
   width: 0.9rem;
   height: 0.9rem;
+  transition: transform var(--duration-fast) var(--ease-out-expo);
+}
+
+/* Success/error feedback, toggled briefly by scripts/code-block.js after a
+   copy attempt — the smallest change that makes the outcome unmistakable. */
+.code-block__copy--copied {
+  color: var(--accent);
+}
+
+.code-block__copy--copied svg {
+  transform: scale(1.15);
+}
+
+.code-block__copy--error {
+  color: var(--danger);
 }
 
 .code-block pre {
@@ -1004,7 +1070,12 @@ dialog.docs-drawer::backdrop {
   transition: transform var(--duration-fast) var(--ease-out-expo);
 }
 
-.faq-item[open] .faq-item__question svg {
+/* :not(.faq-item--closing) keeps the chevron in sync with the actual
+   collapse animation (scripts/faq.js), not with the [open] attribute alone
+   — [open] is only removed at the very end of the closing animation, so
+   without this the chevron would stay rotated until the panel had already
+   fully shrunk. */
+.faq-item[open]:not(.faq-item--closing) .faq-item__question svg {
   transform: rotate(180deg);
 }
 
@@ -1012,6 +1083,12 @@ dialog.docs-drawer::backdrop {
   padding: 0 var(--space-6) var(--space-4);
   color: var(--ink-muted);
 }
+
+/* .faq-item already has overflow: hidden above (for the rounded corners),
+   which is exactly what scripts/faq.js's height animation needs — native
+   <details> removes its content from layout on close instantly, which pure
+   CSS cannot tween, so the height itself is animated via the Web Animations
+   API instead. */
 
 /* ===== Search overlay (native <dialog>) ===== */
 
@@ -1025,10 +1102,40 @@ dialog.search-dialog {
   border: 1px solid var(--border);
   box-shadow: var(--shadow-md);
   margin: 4rem auto auto;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo),
+    overlay var(--duration-base) allow-discrete,
+    display var(--duration-base) allow-discrete;
+}
+
+/* @starting-style gives supporting browsers an explicit "from" state to
+   transition out of when the dialog enters the top layer — a fade + slight
+   drop-in. Browsers without @starting-style just see opacity/transform at
+   their target values immediately, i.e. today's instant-appear behavior:
+   pure progressive enhancement, no fallback branch needed. */
+@starting-style {
+  dialog.search-dialog[open] {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
 }
 
 dialog.search-dialog::backdrop {
   background: oklch(0 0 0 / 0.5);
+  opacity: 1;
+  transition:
+    opacity var(--duration-base) var(--ease-out-expo),
+    overlay var(--duration-base) allow-discrete,
+    display var(--duration-base) allow-discrete;
+}
+
+@starting-style {
+  dialog.search-dialog[open]::backdrop {
+    opacity: 0;
+  }
 }
 
 .search-dialog__inner {
@@ -1058,10 +1165,6 @@ dialog.search-dialog::backdrop {
   border: none;
   color: var(--ink);
   font-size: var(--text-base);
-}
-
-.search-dialog__input:focus {
-  outline: none;
 }
 
 .search-dialog__input::-webkit-search-cancel-button {

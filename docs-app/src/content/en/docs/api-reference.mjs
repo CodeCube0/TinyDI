@@ -14,7 +14,7 @@ export const blocks = [
   { type: 'code', lang: 'ts', code: 'function createToken<T>(description: string): Token<T>' },
   {
     type: 'p',
-    html: '<strong>Parameters:</strong> <code>description</code> — a human-readable label used in error messages. Does not need to be unique.<br><strong>Returns:</strong> a <code>Token&lt;T&gt;</code>, usable with <code>registerInstance</code>, <code>registerFactory</code> and <code>resolve</code>.',
+    html: '<strong>Parameters:</strong> <code>description</code>: a human-readable label used in error messages. Does not need to be unique.<br><strong>Returns:</strong> a <code>Token&lt;T&gt;</code>, usable with <code>registerInstance</code>, <code>registerFactory</code> and <code>resolve</code>.',
   },
   {
     type: 'code',
@@ -43,7 +43,7 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: 'Only these two values exist. <code>Singleton</code> is the default used by <code>registerFactory</code> when no lifetime is given. See <a href="/docs/lifetimes.html">Lifetimes</a> for the full explanation.',
+    html: 'Only these two values exist. <code>Singleton</code> is the default used by <code>registerFactory</code> when no lifetime is given. See <a href="lifetimes.html">Lifetimes</a> for the full explanation.',
   },
 
   { type: 'heading', level: 2, id: 'container', text: 'Container' },
@@ -74,7 +74,7 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: '<strong>Parameters:</strong> <code>token</code> — the service identifier; <code>instance</code> — the value returned on every resolution.<br><strong>Returns:</strong> <code>void</code>.<br><strong>Throws:</strong> <code>RegistrationError</code> if <code>token</code> is already registered.',
+    html: '<strong>Parameters:</strong> <code>token</code>: the service identifier; <code>instance</code>: the value returned on every resolution.<br><strong>Returns:</strong> <code>void</code>.<br><strong>Throws:</strong> <code>RegistrationError</code> if <code>token</code> is already registered.',
   },
 
   { type: 'heading', level: 3, id: 'registerfactory', text: 'registerFactory' },
@@ -85,14 +85,14 @@ const MailServiceToken = createToken<IMailService>('MailService');`,
   },
   {
     type: 'p',
-    html: '<strong>Parameters:</strong> <code>token</code> — the service identifier; <code>factory</code> — builds the instance, receiving the container so it can resolve its own dependencies; <code>lifetime</code> — <code>Singleton</code> (default) or <code>Transient</code>.<br><strong>Returns:</strong> <code>void</code>.<br><strong>Throws:</strong> <code>RegistrationError</code> if <code>token</code> is already registered.',
+    html: '<strong>Parameters:</strong> <code>token</code>: the service identifier; <code>factory</code>: builds the instance, receiving the container so it can resolve its own dependencies; <code>lifetime</code>: <code>Singleton</code> (default) or <code>Transient</code>.<br><strong>Returns:</strong> <code>void</code>.<br><strong>Throws:</strong> <code>RegistrationError</code> if <code>token</code> is already registered.',
   },
 
   { type: 'heading', level: 3, id: 'resolve', text: 'resolve' },
   { type: 'code', lang: 'ts', code: 'resolve<T>(token: Token<T>): T' },
   {
     type: 'p',
-    html: '<strong>Parameters:</strong> <code>token</code> — the service identifier to resolve.<br><strong>Returns:</strong> the resolved instance, typed as <code>T</code>.<br><strong>Throws:</strong> <code>ResolutionError</code> if unregistered; <code>CircularDependencyError</code> if resolving it requires resolving itself again, directly or transitively.',
+    html: '<strong>Parameters:</strong> <code>token</code>: the service identifier to resolve.<br><strong>Returns:</strong> the resolved instance, typed as <code>T</code>.<br><strong>Throws:</strong> <code>ResolutionError</code> if unregistered; <code>CircularDependencyError</code> if resolving it requires resolving itself again, directly or transitively.',
   },
 
   { type: 'heading', level: 3, id: 'has-remove-clear', text: 'has / remove / clear' },
@@ -115,14 +115,27 @@ clear(): void`,
   },
   {
     type: 'api-table',
-    headers: ['Class', 'Thrown when'],
+    headers: ['Class', 'Thrown when', 'How to fix'],
     rows: [
-      ['<code>ContainerError</code>', 'Abstract base class. Never thrown directly.'],
-      ['<code>RegistrationError</code>', 'Registering a token that is already registered.'],
-      ['<code>ResolutionError</code>', 'Resolving a token with no registration.'],
+      [
+        '<code>ContainerError</code>',
+        'Abstract base class. Never thrown directly.',
+        'Catch it to handle any container error generically, via <code>instanceof ContainerError</code>.',
+      ],
+      [
+        '<code>RegistrationError</code>',
+        'Registering a token that is already registered.',
+        'Call <code>remove(token)</code> before re-registering it, or register the new implementation under a different token.',
+      ],
+      [
+        '<code>ResolutionError</code>',
+        'Resolving a token with no registration.',
+        'Check for a typo\'d token reference, a missing <code>registerInstance</code>/<code>registerFactory</code> call, or a <code>resolve()</code> happening before registration runs.',
+      ],
       [
         '<code>CircularDependencyError</code>',
         'Resolving a token that (transitively) depends on itself.',
+        'Read <code>.path</code> to see the exact cycle, then break it — extract the shared logic both services depend on into a third service, or resolve the dependency lazily inside the factory instead of eagerly at construction time.',
       ],
     ],
   },

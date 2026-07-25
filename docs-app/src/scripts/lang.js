@@ -27,11 +27,23 @@
   if (!banner) return;
 
   banner.querySelector('[data-lang-banner-dismiss]')?.addEventListener('click', () => {
-    delete document.documentElement.dataset.langBannerShow;
     try {
       sessionStorage.setItem('tinydi-lang-banner-dismissed', banner.dataset.langBanner);
     } catch {
       // ignore
     }
+
+    const hide = () => {
+      delete document.documentElement.dataset.langBannerShow;
+      banner.classList.remove('is-dismissing');
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      hide();
+      return;
+    }
+
+    banner.addEventListener('transitionend', hide, { once: true });
+    banner.classList.add('is-dismissing');
   });
 })();
