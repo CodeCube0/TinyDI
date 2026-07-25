@@ -1,6 +1,7 @@
 export const meta = {
   title: 'Confronto',
-  description: 'Come si confronta TinyDI con TSyringe, InversifyJS e una composition root scritta a mano.',
+  description:
+    'Come si confronta TinyDI con TSyringe, InversifyJS e una composition root scritta a mano.',
 };
 
 export const blocks = [
@@ -74,7 +75,7 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "Molti developer esperti evitano del tutto un container DI: un unico file collega ogni dipendenza a mano con semplici chiamate a funzione. È proprio quella composition root, non un altro container, il vero concorrente di TinyDI nella maggior parte dei casi.",
+    html: 'Molti developer esperti evitano del tutto un container DI: un unico file collega ogni dipendenza a mano con semplici chiamate a funzione. È proprio quella composition root, non un altro container, il vero concorrente di TinyDI nella maggior parte dei casi.',
   },
   {
     type: 'compare-table',

@@ -69,6 +69,6 @@ container.clear(); // rimuove tutte le registrazioni`,
     type: 'callout',
     kind: 'tip',
     title: 'Sostituire una registrazione',
-    html: "Registrare un token già registrato lancia <code>RegistrationError</code>, di proposito. Chiama prima <code>remove()</code> — utile deliberatamente per sostituire un'implementazione finta tra un test e l'altro. Vedi <a href=\"testing.html\">Testing</a> per il pattern completo.",
+    html: 'Registrare un token già registrato lancia <code>RegistrationError</code>, di proposito. Chiama prima <code>remove()</code> — utile deliberatamente per sostituire un\'implementazione finta tra un test e l\'altro. Vedi <a href="testing.html">Testing</a> per il pattern completo.',
   },
 ];

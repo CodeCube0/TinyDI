@@ -120,7 +120,7 @@ clear(): void`,
       [
         '<code>ContainerError</code>',
         'Classe base astratta. Mai lanciata direttamente.',
-        "Intercettala per gestire in modo generico qualsiasi errore del container, con <code>instanceof ContainerError</code>.",
+        'Intercettala per gestire in modo generico qualsiasi errore del container, con <code>instanceof ContainerError</code>.',
       ],
       [
         '<code>RegistrationError</code>',
@@ -130,12 +130,12 @@ clear(): void`,
       [
         '<code>ResolutionError</code>',
         'Si risolve un token senza registrazione.',
-        "Controlla se il riferimento al token contiene un errore di battitura, se manca una chiamata a <code>registerInstance</code>/<code>registerFactory</code>, o se <code>resolve()</code> viene eseguito prima che la registrazione avvenga.",
+        'Controlla se il riferimento al token contiene un errore di battitura, se manca una chiamata a <code>registerInstance</code>/<code>registerFactory</code>, o se <code>resolve()</code> viene eseguito prima che la registrazione avvenga.',
       ],
       [
         '<code>CircularDependencyError</code>',
         'Si risolve un token che dipende (transitivamente) da se stesso.',
-        "Leggi <code>.path</code> per vedere il ciclo esatto, poi spezzalo — estrai la logica condivisa da entrambi i servizi in un terzo servizio, oppure risolvi la dipendenza in modo lazy dentro la factory invece che in modo eager alla costruzione.",
+        'Leggi <code>.path</code> per vedere il ciclo esatto, poi spezzalo — estrai la logica condivisa da entrambi i servizi in un terzo servizio, oppure risolvi la dipendenza in modo lazy dentro la factory invece che in modo eager alla costruzione.',
       ],
     ],
   },

@@ -130,7 +130,7 @@ clear(): void`,
       [
         '<code>ResolutionError</code>',
         'Resolving a token with no registration.',
-        'Check for a typo\'d token reference, a missing <code>registerInstance</code>/<code>registerFactory</code> call, or a <code>resolve()</code> happening before registration runs.',
+        "Check for a typo'd token reference, a missing <code>registerInstance</code>/<code>registerFactory</code> call, or a <code>resolve()</code> happening before registration runs.",
       ],
       [
         '<code>CircularDependencyError</code>',

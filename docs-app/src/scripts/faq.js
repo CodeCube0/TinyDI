@@ -45,10 +45,13 @@
         onFinish();
       };
 
-      animation = details.animate({ height: [startHeight, endHeight] }, {
-        duration: DURATION,
-        easing: EASING,
-      });
+      animation = details.animate(
+        { height: [startHeight, endHeight] },
+        {
+          duration: DURATION,
+          easing: EASING,
+        },
+      );
       animation.onfinish = settle;
       animation.oncancel = () => {
         animation = null;

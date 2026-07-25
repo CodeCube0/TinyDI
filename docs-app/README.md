@@ -17,7 +17,7 @@ npm run dev     # build + serve
 ## Layout
 
 - `src/styles/` — design tokens (`tokens.css`), reset (`base.css`), components (`components.css`), self-hosted `@font-face` (`fonts.css`).
-- `src/scripts/` — runtime JS shipped as-is: theme toggle, language switcher, client-side search, code-block copy button, mobile nav/scroll-spy.
+- `src/scripts/` — runtime JS shipped as-is: theme toggle (animated sun/moon crossfade), language switcher (with an animated dismiss for the language banner), client-side search, code-block copy button (with success/error feedback), mobile nav/scroll-spy, animated FAQ accordion.
 - `src/lib/` — build-time helpers: the content-block renderer (`blocks.mjs`), the hand-rolled syntax highlighter (`highlight.mjs`), the SVG resolution-graph diagram (`graph-diagram.mjs`), the icon set (`icons.mjs`).
 - `src/templates/` — `layout.mjs` (header/sidebar/footer/search dialog/drawer shell) and `home.mjs` (homepage sections).
 - `src/content/{en,it}/docs/*.mjs` — one file per documentation page, per language, as a small block-based DSL (see `src/lib/blocks.mjs`).

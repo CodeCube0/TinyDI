@@ -43,7 +43,12 @@ export const blocks = [
     type: 'p',
     html: "TinyDI non ha un'API specifica per i test, e non ne ha bisogno. Registrazione e risoluzione sono semplici chiamate a metodo, quindi testare è normale TypeScript: costruisci un container, registra una finta implementazione al posto di quella reale, risolvi, verifica.",
   },
-  { type: 'heading', level: 2, id: 'fresh-container-per-test', text: 'Un container nuovo per ogni test' },
+  {
+    type: 'heading',
+    level: 2,
+    id: 'fresh-container-per-test',
+    text: 'Un container nuovo per ogni test',
+  },
   {
     type: 'p',
     html: "L'istanza in cache di un Singleton vive sul <code>Container</code> da cui è stata costruita, non in una variabile globale. Creare un nuovo <code>Container</code> nel setup di ogni test basta a garantire che nessuno stato sopravviva tra un test e l'altro — non esiste un passaggio <code>reset()</code> da ricordare.",
@@ -55,10 +60,15 @@ export const blocks = [
     title: 'Nessuna libreria di mocking necessaria',
     html: "Una finta implementazione è solo una classe o un oggetto che implementa la stessa interfaccia — TypeScript la verifica strutturalmente in fase di compilazione, esattamente come l'implementazione reale. Non c'è nulla da importare oltre a <code>tinydi-container</code> stesso.",
   },
-  { type: 'heading', level: 2, id: 'swapping-mid-test', text: 'Sostituire una finta implementazione a metà test' },
+  {
+    type: 'heading',
+    level: 2,
+    id: 'swapping-mid-test',
+    text: 'Sostituire una finta implementazione a metà test',
+  },
   {
     type: 'p',
-    html: "<a href=\"container.html#has-remove-clear\"><code>remove()</code></a> esiste apposta per questo: registrare un token già registrato lancia <code>RegistrationError</code>, di proposito, quindi chiama <code>remove()</code> prima di ri-registrarlo con una finta implementazione diversa.",
+    html: '<a href="container.html#has-remove-clear"><code>remove()</code></a> esiste apposta per questo: registrare un token già registrato lancia <code>RegistrationError</code>, di proposito, quindi chiama <code>remove()</code> prima di ri-registrarlo con una finta implementazione diversa.',
   },
   { type: 'code', lang: 'ts', code: swapMidTestExample },
   { type: 'heading', level: 2, id: 'what-this-does-not-cover', text: 'Cosa non copre' },

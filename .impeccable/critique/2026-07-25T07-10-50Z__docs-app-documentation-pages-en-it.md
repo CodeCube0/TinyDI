@@ -2,29 +2,30 @@
 target: docs-app documentation pages (EN+IT)
 total_score: 30
 max_score: 40
-na_heuristics: 
+na_heuristics:
 p0_count: 1
 p1_count: 3
 timestamp: 2026-07-25T07-10-50Z
 slug: docs-app-documentation-pages-en-it
 ---
+
 Method: dual-agent (A: a96deef75193b71a0 · B: a334f694faca16754)
 
 ## Design Health Score
 
-| # | Heuristic | Score | Key Issue |
-|---|-----------|-------|-----------|
-| 1 | Visibility of System Status | 3 | Only signal is the sidebar "aria-current" highlight + scroll-spy TOC; nothing else |
-| 2 | Match System / Real World | 4 | Real signatures, real error class names, no marketing filter |
-| 3 | User Control and Freedom | 3 | Esc closes dialogs/drawer well; language banner dismissal is session-only |
-| 4 | Consistency and Standards | 3 | Block DSL consistent across pages; mobile shows sidebar AND drawer with the same 9 links |
-| 5 | Error Prevention | 3 | Mostly n/a for Read mode; search always shows hints |
-| 6 | Recognition Rather Than Recall | 3 | Sidebar always visible on desktop, but 9 flat links with zero grouping |
-| 7 | Flexibility and Efficiency | 2 | Cmd+K works well; zero visible keyboard focus indicators anywhere tested |
-| 8 | Aesthetic and Minimalist Design | 4 | Confirmed live: one accent, no shadows, no decorative clutter |
-| 9 | Error Recovery | 2 | No troubleshooting/error-lookup page for real runtime errors (ResolutionError, etc.) |
-| 10 | Help and Documentation | 3 | Solid core coverage, very uneven depth page to page |
-| **Total** | | **30/40** | **Good, with real gaps** |
+| #         | Heuristic                       | Score     | Key Issue                                                                                |
+| --------- | ------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| 1         | Visibility of System Status     | 3         | Only signal is the sidebar "aria-current" highlight + scroll-spy TOC; nothing else       |
+| 2         | Match System / Real World       | 4         | Real signatures, real error class names, no marketing filter                             |
+| 3         | User Control and Freedom        | 3         | Esc closes dialogs/drawer well; language banner dismissal is session-only                |
+| 4         | Consistency and Standards       | 3         | Block DSL consistent across pages; mobile shows sidebar AND drawer with the same 9 links |
+| 5         | Error Prevention                | 3         | Mostly n/a for Read mode; search always shows hints                                      |
+| 6         | Recognition Rather Than Recall  | 3         | Sidebar always visible on desktop, but 9 flat links with zero grouping                   |
+| 7         | Flexibility and Efficiency      | 2         | Cmd+K works well; zero visible keyboard focus indicators anywhere tested                 |
+| 8         | Aesthetic and Minimalist Design | 4         | Confirmed live: one accent, no shadows, no decorative clutter                            |
+| 9         | Error Recovery                  | 2         | No troubleshooting/error-lookup page for real runtime errors (ResolutionError, etc.)     |
+| 10        | Help and Documentation          | 3         | Solid core coverage, very uneven depth page to page                                      |
+| **Total** |                                 | **30/40** | **Good, with real gaps**                                                                 |
 
 ## Design Specificity Verdict
 
