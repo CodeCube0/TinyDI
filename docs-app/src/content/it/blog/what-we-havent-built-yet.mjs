@@ -13,11 +13,15 @@ export const blocks = [
     type: 'heading',
     level: 2,
     id: 'the-principle',
-    text: 'La regola generale: il minimalismo vince quando è in tensione con la predisposizione al futuro',
+    text: 'La regola generale: il minimalismo vince quando è in conflitto con la predisposizione a estensioni future',
   },
   {
     type: 'p',
-    html: 'Ovunque restare minimali oggi e restare aperti a una specifica estensione futura tirassero in direzioni diverse, ha vinto il minimalismo — è stata la priorità esplicita per tutto il lavoro sulla libreria core. Ciò che rende questa scelta difendibile, e non solo un "tagliare gli angoli", è che ciascuna delle quattro estensioni qui sotto è stata verificata rispetto al design attuale ed è risultata comunque raggiungibile senza un breaking change.',
+    html: 'Ovunque restare minimali oggi e restare aperti a una specifica estensione futura tirassero in direzioni diverse, ha vinto il minimalismo — è stata la priorità esplicita per tutto il lavoro sulla libreria core. È una priorità facile da dichiarare e più difficile da rispettare: "sarebbe utile" è vero per quasi ogni funzionalità che si potrebbe aggiungere a un container DI, ed è esattamente per questo che non può essere il criterio.',
+  },
+  {
+    type: 'p',
+    html: "Ciò che rende difendibili i tagli qui sotto, e non solo un \"non abbiamo fatto in tempo\", è che ciascuna delle quattro estensioni è stata verificata rispetto al design attuale ed è risultata comunque raggiungibile senza un breaking change. Un taglio di scope irreversibile è una scommessa molto più rischiosa di uno che si può ancora disfare più avanti.",
   },
   { type: 'heading', level: 2, id: 'scoped', text: 'Lifetime Scoped' },
   {
@@ -59,5 +63,9 @@ export const blocks = [
   {
     type: 'p',
     html: 'Una roadmap che elenca solo nomi di funzionalità ("Scoped", "Child Container", "Async", "Plugin") si legge come una wish list. Dichiarare per ciascuna se è additiva o richiede un redesign è un segnale più onesto per chiunque debba decidere se dipendere da TinyDI oggi: tre di queste quattro estensioni possono arrivare come aggiunte in stile 2.x senza rompere codice esistente; una (l\'async) è una domanda aperta che richiederebbe un vero lavoro di design prima di essere rilasciata.',
+  },
+  {
+    type: 'p',
+    html: 'Questa distinzione conta più della lista di funzionalità in sé, e vale oltre questa singola libreria: qualunque progetto che tiene una lista di "non ancora" dovrebbe poter dire, per ciascuna voce, se è additiva o richiede un redesign. Se non sai dirlo, non sai davvero quanto ti stia costando quel taglio di scope.',
   },
 ];

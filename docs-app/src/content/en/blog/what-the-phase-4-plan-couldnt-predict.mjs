@@ -67,4 +67,8 @@ export const blocks = [
     type: 'p',
     html: 'None of these three were caught by <code>npm run lint</code>, <code>npm run build</code>, or the test suite — all green throughout. They were caught by clicking through the actual deployed pages, which is the same lesson the earlier docs-site bugs already taught, reconfirmed by a second, independent round of real bugs.',
   },
+  {
+    type: 'p',
+    html: 'If there is one thing worth changing about the process rather than the code, it is this: a manual click-through of the live site belongs after every deploy that touches user-facing behavior, not just after the first one. The first launch gets scrutiny by default because everyone is watching it closely; the fifth deploy does not, and that is exactly when a regression like the copy-button one would go unnoticed.',
+  },
 ];

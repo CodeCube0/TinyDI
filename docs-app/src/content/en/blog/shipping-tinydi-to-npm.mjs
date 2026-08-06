@@ -66,4 +66,8 @@ export const blocks = [
     type: 'p',
     html: "The result is a package that tree-shakes cleanly (ESM output, no side-effecting module-level code) and works the same whether a consumer's bundler picks the <code>import</code> or <code>require</code> condition — verified in practice by the seven examples in this project, which cover both a Vite-based frontend toolchain and plain Node <code>tsx</code> scripts, all resolving the same package correctly.",
   },
+  {
+    type: 'p',
+    html: 'Getting the package itself right turned out to be necessary but not sufficient. Actually publishing it — the point where a package.json meets npm\'s real infrastructure — surfaced a separate set of problems none of this predicted, covered in <a href="what-the-phase-4-plan-couldnt-predict.html">the release post</a>.',
+  },
 ];

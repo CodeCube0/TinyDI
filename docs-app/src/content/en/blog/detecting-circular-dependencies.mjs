@@ -17,7 +17,11 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: 'Because every factory receives the container explicitly (see <a href="why-no-reflect-metadata.html">the reflect-metadata post</a>) instead of resolving dependencies through some implicit mechanism, the container always knows exactly which token is currently mid-resolution. It keeps a simple array, <code>resolutionPath</code>, and pushes the current token onto it before invoking a factory, popping it back off when the factory returns:',
+    html: 'Because every factory receives the container explicitly (see <a href="why-no-reflect-metadata.html">the reflect-metadata post</a>) instead of resolving dependencies through some implicit mechanism, the container always knows exactly which token is currently mid-resolution.',
+  },
+  {
+    type: 'p',
+    html: 'It keeps a simple array, <code>resolutionPath</code>, and pushes the current token onto it before invoking a factory, popping it back off when the factory returns:',
   },
   {
     type: 'code',

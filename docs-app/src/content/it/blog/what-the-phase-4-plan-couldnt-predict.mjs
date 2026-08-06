@@ -53,7 +53,7 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: 'Un giro successivo sul sito di documentazione già pubblicato ha fatto emergere un\'altra serie di bug visibili solo in produzione, oltre ai tre già raccontati in <a href="a-docs-site-without-a-framework.html">il post sul sito di documentazione</a>:',
+    html: 'Un giro successivo sul sito di documentazione già pubblicato ha fatto emergere un\'altra serie di bug visibili solo in produzione, oltre ai tre già raccontati <a href="a-docs-site-without-a-framework.html">nel post sul sito di documentazione</a>:',
   },
   {
     type: 'list',
@@ -66,5 +66,9 @@ export const blocks = [
   {
     type: 'p',
     html: 'Nessuno di questi tre è stato intercettato da <code>npm run lint</code>, <code>npm run build</code>, o dalla suite di test — sempre tutti verdi. Sono stati scoperti navigando davvero le pagine pubblicate, la stessa lezione già insegnata dai bug precedenti del sito di documentazione, riconfermata da un secondo giro indipendente di bug reali.',
+  },
+  {
+    type: 'p',
+    html: "Se c'è una cosa da cambiare nel processo, più che nel codice, è questa: un giro manuale di verifica sul sito live dovrebbe seguire ogni deploy che tocca comportamento visibile all'utente, non solo il primo. Il primo lancio riceve attenzione per default, perché tutti lo stanno guardando da vicino; il quinto deploy no, ed è esattamente lì che una regressione come quella del pulsante di copia passerebbe inosservata.",
   },
 ];

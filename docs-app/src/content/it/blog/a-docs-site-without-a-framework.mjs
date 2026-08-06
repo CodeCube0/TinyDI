@@ -17,7 +17,11 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "La specifica escludeva un framework a runtime per il sito consegnato — nulla lato client che faccia routing, hydration o rendering. Non escludeva un piccolo script eseguito in fase di build che trasforma contenuto strutturato in file statici, che è una cosa del tutto diversa da ciò che il browser di chi legge deve eseguire. <code>docs-app/src/lib/highlight.mjs</code> (un tokenizzatore a regex scritto a mano per l'evidenziazione della sintassi) e <code>src/scripts/search.js</code> (uno scorer di sottostringhe scritto a mano su un indice JSON precostruito) seguono la stessa lettura: niente Fuse.js, niente libreria di syntax highlighting lato client, tutto fatto in fase di build o con JavaScript vanilla puro.",
+    html: "La specifica escludeva un framework a runtime per il sito consegnato — nulla lato client che faccia routing, hydration o rendering. Non escludeva un piccolo script eseguito in fase di build che trasforma contenuto strutturato in file statici, che è una cosa del tutto diversa da ciò che il browser di chi legge deve eseguire.",
+  },
+  {
+    type: 'p',
+    html: "<code>docs-app/src/lib/highlight.mjs</code> (un tokenizzatore a regex scritto a mano per l'evidenziazione della sintassi) e <code>src/scripts/search.js</code> (uno scorer di sottostringhe scritto a mano su un indice JSON precostruito) seguono la stessa lettura: niente Fuse.js, niente libreria di syntax highlighting lato client, tutto fatto in fase di build o con JavaScript vanilla puro.",
   },
   { type: 'heading', level: 2, id: 'content-as-data', text: 'Il contenuto è dato, non markup' },
   {
@@ -40,7 +44,7 @@ export const blocks = [
   {
     type: 'callout',
     kind: 'warning',
-    title: 'Uno schema che vale la pena nominare',
+    title: 'Uno schema che merita un nome',
     html: 'Tutti e tre i bug sopra — più un quarto trovato successivamente (un pulsante "cancella" nativo e uno personalizzato entrambi renderizzati sul campo di ricerca) — condividono una proprietà: erano invisibili nel sorgente e visibili solo una volta renderizzati. Type checking e test unitari non intercettano una regola CSS di dimensione mancante o la violazione di un contratto di un\'API specifica del browser. È l\'argomento concreto, dalla storia stessa di questo progetto, per aprire davvero la pagina invece di fidarsi di un lint/type-check pulito.',
   },
   {
@@ -52,5 +56,9 @@ export const blocks = [
   {
     type: 'p',
     html: 'La lingua scelta persiste in <code>localStorage</code>, ma una pagina non corrispondente mostra solo un banner richiudibile ("Continue in English" / "Continua in italiano") — non fa mai un redirect forzato. Un redirect forzato è dannoso per i link diretti, rompe la navigazione all\'indietro, e ostacola attivamente i crawler che cercano di valutare correttamente i tag <code>hreflang</code>. È stato un compromesso consapevole tra comodità e correttezza, e ha vinto la correttezza.',
+  },
+  {
+    type: 'p',
+    html: "Questi tre non sono stati gli ultimi bug che questo sito ha prodotto allo stesso modo. Un giro successivo, dopo che il sito è andato davvero online, ne ha fatto emergere un'altra tornata, indipendente, raccontata <a href=\"what-the-phase-4-plan-couldnt-predict.html\">nel post sulla release</a> — una build pulita non è la stessa cosa di una pagina che funziona davvero, e a questo progetto è toccato impararlo due volte.",
   },
 ];

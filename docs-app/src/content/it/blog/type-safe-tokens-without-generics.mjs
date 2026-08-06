@@ -7,7 +7,11 @@ export const meta = {
 export const blocks = [
   {
     type: 'p',
-    html: 'Un container DI ha bisogno di un modo per identificare un servizio. Le chiavi stringa sono la scelta più ovvia ed è anche la più facile da sbagliare: due moduli non correlati possono scegliere la stessa stringa per due cose diverse, e un refuso nella stringa emerge come errore a runtime invece che in compilazione. TinyDI usa invece i <strong>token</strong> — e la parte interessante non è che i token esistano, ma come permettano a <code>resolve()</code> di conoscere il tipo di ritorno senza mai scrivere <code>resolve&lt;IMailService&gt;(token)</code>.',
+    html: 'Un container DI ha bisogno di un modo per identificare un servizio. Le chiavi stringa sono la scelta più ovvia, ed è anche la più facile da sbagliare: due moduli non correlati possono scegliere la stessa stringa per due cose diverse, e un refuso nella stringa emerge come errore a runtime invece che in compilazione.',
+  },
+  {
+    type: 'p',
+    html: 'TinyDI usa invece i <strong>token</strong>. La parte interessante non è che i token esistano — molti container hanno una qualche nozione di token. È nel modo in cui un token di TinyDI permette a <code>resolve()</code> di conoscere il tipo di ritorno esatto, senza mai scrivere <code>resolve&lt;IMailService&gt;(token)</code>.',
   },
   {
     type: 'heading',
@@ -81,6 +85,14 @@ a.symbol !== b.symbol; // true — token distinti, nessuna collisione`,
   { type: 'heading', level: 2, id: 'consequences', text: 'Conseguenze' },
   {
     type: 'p',
-    html: "Questo esclude un'intera categoria di bug che i container a chiave stringa devono aggirare per convenzione (namespacing delle chiavi, lint per i duplicati): qui è strutturalmente impossibile che due chiamate <code>createToken</code> non correlate collidano, perché JavaScript garantisce che ogni chiamata a <code>Symbol()</code> produca un valore unico. Il costo è quasi nullo — un'allocazione in più per token, creata una sola volta al caricamento del modulo, non a ogni risoluzione.",
+    html: "Questo esclude un'intera categoria di bug che i container a chiave stringa devono aggirare per convenzione (namespacing delle chiavi, lint per i duplicati): qui è strutturalmente impossibile che due chiamate <code>createToken</code> non correlate collidano, perché JavaScript garantisce che ogni chiamata a <code>Symbol()</code> produca un valore unico.",
+  },
+  {
+    type: 'p',
+    html: "Il costo è quasi nullo — un'allocazione in più per token, creata una sola volta al caricamento del modulo, non a ogni risoluzione. È una forma rara per un compromesso: di solito una garanzia più forte costa qualcosa, a runtime o in ergonomia, e qui nessuno dei due costi si applica.",
+  },
+  {
+    type: 'p',
+    html: 'Questo è stato uno dei due punti della libreria core che hanno richiesto un vero lavoro di design invece di una scelta ovvia — la forma del token qui, e capire, dopo aver rilevato un ciclo, come <a href="detecting-circular-dependencies.html">spiegarlo a chi lo legge</a>.',
   },
 ];

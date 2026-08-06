@@ -17,7 +17,11 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: 'Wherever staying minimal today and staying open to a specific future extension pulled in different directions, minimalism won — that was the explicit priority throughout the core library work. What makes this defensible rather than just "cutting corners" is that each of the four extensions below was checked against the current design and found to still be reachable without a breaking change.',
+    html: 'Wherever staying minimal today and staying open to a specific future extension pulled in different directions, minimalism won — that was the explicit priority throughout the core library work. It is an easy priority to state and a harder one to hold to: "this would be useful" is true of almost any feature you could add to a DI container, which is exactly why it cannot be the bar.',
+  },
+  {
+    type: 'p',
+    html: 'What makes the cuts below defensible, rather than just "we ran out of time," is that each of the four extensions was checked against the current design and found to still be reachable without a breaking change. An irreversible scope cut is a much riskier bet than one you can still walk back later.',
   },
   { type: 'heading', level: 2, id: 'scoped', text: 'Scoped lifetime' },
   {
@@ -59,5 +63,9 @@ export const blocks = [
   {
     type: 'p',
     html: 'A roadmap that just lists feature names ("Scoped", "Child Containers", "Async", "Plugins") reads as a wish list. Stating for each one whether it\'s additive or requires a redesign is a more honest signal to anyone deciding whether to depend on TinyDI today: three of these four extensions can land as 2.x-style additions without breaking existing code; one of them (async) is an open question that would need real design work before it ships.',
+  },
+  {
+    type: 'p',
+    html: 'That distinction matters more than the feature list itself, and it generalizes past this one library: any project keeping a "not yet" list should be able to say, for each item, whether it is additive or would need a redesign. If you cannot say which, you do not actually know what that scope cut is costing you.',
   },
 ];

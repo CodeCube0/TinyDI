@@ -17,7 +17,11 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: 'Poiché ogni factory riceve il container in modo esplicito (vedi <a href="why-no-reflect-metadata.html">il post su reflect-metadata</a>) invece di risolvere le dipendenze tramite un meccanismo implicito, il container sa sempre esattamente quale token è attualmente in corso di risoluzione. Mantiene un semplice array, <code>resolutionPath</code>, e vi inserisce il token corrente prima di invocare una factory, rimuovendolo quando la factory restituisce il risultato:',
+    html: 'Poiché ogni factory riceve il container in modo esplicito (vedi <a href="why-no-reflect-metadata.html">il post su reflect-metadata</a>) invece di risolvere le dipendenze tramite un meccanismo implicito, il container sa sempre esattamente quale token è attualmente in corso di risoluzione.',
+  },
+  {
+    type: 'p',
+    html: 'Mantiene un semplice array, <code>resolutionPath</code>, e vi inserisce il token corrente prima di invocare una factory, rimuovendolo quando la factory restituisce il risultato:',
   },
   {
     type: 'code',
@@ -55,11 +59,11 @@ export const blocks = [
     type: 'heading',
     level: 2,
     id: 'the-error-format',
-    text: "La parte che ha davvero richiesto iterazione: il formato dell'errore",
+    text: "La parte che ha davvero richiesto più iterazioni: il formato dell'errore",
   },
   {
     type: 'p',
-    html: "Rilevare il ciclo è stata la metà facile. La domanda più difficile è stata come dovesse apparire il messaggio d'errore risultante — uno stack trace che punta a <code>resolveFactory</code> non aiuta uno sviluppatore che deve sapere <em>quali servizi</em> formano il ciclo. Il formato scelto mostra l'intera catena, un token per riga, con ogni voce successiva alla prima preceduta da una freccia:",
+    html: "Rilevare il ciclo è stata la metà facile del problema. La domanda più difficile è stata come dovesse apparire il messaggio d'errore risultante — uno stack trace che punta a <code>resolveFactory</code> non aiuta uno sviluppatore che deve sapere <em>quali servizi</em> formano il ciclo. Il formato scelto mostra l'intera catena, un token per riga, con ogni voce successiva alla prima preceduta da una freccia:",
   },
   {
     type: 'code',
@@ -90,7 +94,7 @@ A
     title: 'Testato come stringa esatta, non solo "contiene"',
     html: "La suite di test verifica questo formato esatto con un controllo di uguaglianza sull'intera stringa, non con un più permissivo <code>toContain()</code>. Un'asserzione più permissiva passerebbe felicemente anche se il prefisso a freccia sparisse silenziosamente dal primo token, o se il token di chiusura smettesse di ripetersi — regressioni che emergerebbero solo a uno sviluppatore reale che legge un errore reale, non alla suite di test.",
   },
-  { type: 'heading', level: 2, id: 'consequences', text: 'Perché vale un intero post' },
+  { type: 'heading', level: 2, id: 'consequences', text: 'Perché merita un post intero' },
   {
     type: 'p',
     html: "È una funzione piccola — una dozzina di righe, nessun algoritmo elaborato — ma è un buon esempio di dove si annidi il costo reale di una funzionalità. Rilevare <em>che</em> un ciclo esiste è costato una chiamata a <code>findIndex</code>; decidere <em>come spiegarlo</em> a una persona ha richiesto il resto dello sforzo di design, ed è la parte che determina davvero se l'errore sia utile il giorno in cui qualcuno lo incontra in un codebase reale.",

@@ -45,7 +45,15 @@ container.registerFactory(
   { type: 'heading', level: 2, id: 'consequences', text: 'Consequences and trade-offs' },
   {
     type: 'p',
-    html: 'The trade-off is real, not just rhetorical, and it shows up in two concrete places we hit while building the rest of the project. First: circular dependency detection. Because every resolution goes through the same explicit <code>resolve()</code> call, tracking which token is currently being built is just an array push/pop around a function call — no need to reconstruct an implicit dependency graph from decorator metadata. Second: framework integration. Each of the seven <a href="../docs/examples.html">examples</a> — including Vue, Nuxt and React — bridges TinyDI into that framework\'s own DI-like mechanism (<code>provide</code>/<code>inject</code>, a Nuxt plugin, React Context) with a few lines of hand-written adapter code. A reflection-based container would need framework-specific knowledge of how each of those systems constructs objects; ours doesn\'t need to know anything about them at all.',
+    html: 'The trade-off is real, not just rhetorical, and it shows up in two concrete places we hit while building the rest of the project.',
+  },
+  {
+    type: 'p',
+    html: 'First: <a href="detecting-circular-dependencies.html">circular dependency detection</a>. Because every resolution goes through the same explicit <code>resolve()</code> call, tracking which token is currently being built is just an array push/pop around a function call — no need to reconstruct an implicit dependency graph from decorator metadata.',
+  },
+  {
+    type: 'p',
+    html: 'Second: framework integration. Each of the seven <a href="../docs/examples.html">examples</a> — including Vue, Nuxt and React — bridges TinyDI into that framework\'s own DI-like mechanism (<code>provide</code>/<code>inject</code>, a Nuxt plugin, React Context) with a few lines of hand-written adapter code. A reflection-based container would need framework-specific knowledge of how each of those systems constructs objects; ours doesn\'t need to know anything about them at all. Neither of these was the point of the decision — they were a consequence of it, discovered after the fact rather than designed for in advance.',
   },
   {
     type: 'callout',

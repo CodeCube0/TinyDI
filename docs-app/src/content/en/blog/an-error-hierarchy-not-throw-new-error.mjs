@@ -68,7 +68,11 @@ export class CircularDependencyError extends ContainerError { /* ... */ }`,
   },
   {
     type: 'p',
-    html: 'This was a deliberate choice, not the only reasonable one: a class of error the spec had declared but not described still needed a design decision to actually be honored as a public contract, rather than left to whatever the implementation happened to do first. Silent overwrite is a footgun in a DI container — accidentally registering the same token twice (e.g. once in application code, once in a test setup that forgot to clean up) is exactly the kind of bug that is loud and obvious the moment it happens with an explicit throw, and silent and hard to trace if the second registration just wins.',
+    html: 'This was a deliberate choice, not the only reasonable one: a class of error the spec had declared but not described still needed a design decision to actually be honored as a public contract, rather than left to whatever the implementation happened to do first.',
+  },
+  {
+    type: 'p',
+    html: 'Silent overwrite is a footgun in a DI container. Accidentally registering the same token twice — once in application code, once in a test setup that forgot to clean up, most commonly — is exactly the kind of bug that is loud and obvious the moment it happens with an explicit throw, and silent and hard to trace if the second registration just wins. Throwing costs a little convenience; letting it slide costs a debugging session weeks later, tracing why the wrong implementation is somehow the one that got resolved.',
   },
   {
     type: 'callout',
@@ -79,6 +83,6 @@ export class CircularDependencyError extends ContainerError { /* ... */ }`,
   { type: 'heading', level: 2, id: 'consequences', text: 'What this means for consumers' },
   {
     type: 'p',
-    html: 'A four-class hierarchy over a flat <code>Error</code> is a small amount of extra code, but it lets consumers branch on failure kind when they need to (e.g. treat a <code>ResolutionError</code> for an optional service differently from a <code>RegistrationError</code> surfaced during app bootstrap) while still being able to catch everything DI-related with one <code>instanceof ContainerError</code> check. See the <a href="../docs/api-reference.html">API Reference</a> for the full error surface.',
+    html: 'A four-class hierarchy over a flat <code>Error</code> is a small amount of extra code, but it lets consumers branch on failure kind when they need to (e.g. treat a <code>ResolutionError</code> for an optional service differently from a <code>RegistrationError</code> surfaced during app bootstrap) while still being able to catch everything DI-related with one <code>instanceof ContainerError</code> check. <code>CircularDependencyError</code>, the fourth subclass, gets <a href="detecting-circular-dependencies.html">its own post</a> — the interesting part there was not the class itself but the message format. See the <a href="../docs/api-reference.html">API Reference</a> for the full error surface.',
   },
 ];

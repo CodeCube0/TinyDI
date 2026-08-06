@@ -17,7 +17,11 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "The spec ruled out a runtime framework for the shipped site — nothing client-side doing routing, hydration, or rendering. It did not rule out a small build-time script that turns structured content into static files, which is a different thing entirely from what a reader's browser has to execute. <code>docs-app/src/lib/highlight.mjs</code> (a hand-rolled regex tokenizer for syntax highlighting) and <code>src/scripts/search.js</code> (a hand-written substring scorer over a prebuilt JSON index) follow the same reading: no Fuse.js, no client-side highlighting library, both done at build time or with plain vanilla JS.",
+    html: "The spec ruled out a runtime framework for the shipped site — nothing client-side doing routing, hydration, or rendering. It did not rule out a small build-time script that turns structured content into static files, which is a different thing entirely from what a reader's browser has to execute.",
+  },
+  {
+    type: 'p',
+    html: '<code>docs-app/src/lib/highlight.mjs</code> (a hand-rolled regex tokenizer for syntax highlighting) and <code>src/scripts/search.js</code> (a hand-written substring scorer over a prebuilt JSON index) follow the same reading: no Fuse.js, no client-side highlighting library, both done at build time or with plain vanilla JS.',
   },
   { type: 'heading', level: 2, id: 'content-as-data', text: 'Content is data, not markup' },
   {
@@ -57,5 +61,9 @@ export const blocks = [
   {
     type: 'p',
     html: 'The chosen language persists in <code>localStorage</code>, but a mismatched page only ever shows a dismissible banner ("Continue in English" / "Continua in italiano") — it never force-redirects. A forced redirect is bad for deep links, breaks back-navigation, and actively fights crawlers trying to evaluate <code>hreflang</code> tags correctly. This was a conscious trade-off between convenience and correctness, and correctness won.',
+  },
+  {
+    type: 'p',
+    html: 'These three were not the last bugs this site produced this way, either. A later pass, after the site actually went live, turned up a further, unrelated round, covered in <a href="what-the-phase-4-plan-couldnt-predict.html">the release post</a> — a clean build is not the same thing as a working page, and this project needed reminding twice.',
   },
 ];

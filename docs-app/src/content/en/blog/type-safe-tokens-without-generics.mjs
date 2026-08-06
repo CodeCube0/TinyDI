@@ -7,7 +7,11 @@ export const meta = {
 export const blocks = [
   {
     type: 'p',
-    html: 'A DI container needs some way to identify a service. String keys are the obvious choice and the easiest to get wrong: two unrelated modules can pick the same string for two different things, and a typo in the string surfaces as a runtime error instead of a compile error. TinyDI uses <strong>tokens</strong> instead — and the interesting part is not that tokens exist, it is how they let <code>resolve()</code> know the return type without you ever writing <code>resolve&lt;IMailService&gt;(token)</code>.',
+    html: 'A DI container needs some way to identify a service. String keys are the obvious choice, and the easiest to get wrong: two unrelated modules can pick the same string for two different things, and a typo in the string surfaces as a runtime error instead of a compile error.',
+  },
+  {
+    type: 'p',
+    html: 'TinyDI uses <strong>tokens</strong> instead. The interesting part is not that tokens exist — plenty of containers have some notion of a token. It is how a TinyDI token lets <code>resolve()</code> know the exact return type, without you ever writing <code>resolve&lt;IMailService&gt;(token)</code>.',
   },
   {
     type: 'heading',
@@ -81,6 +85,14 @@ a.symbol !== b.symbol; // true — distinct tokens, no collision`,
   { type: 'heading', level: 2, id: 'consequences', text: 'Consequences' },
   {
     type: 'p',
-    html: 'This rules out an entire category of bug that string-keyed containers have to work around by convention (namespacing keys, linting for duplicates): here it is structurally impossible for two unrelated <code>createToken</code> calls to collide, because JavaScript guarantees every <code>Symbol()</code> call produces a unique value. The cost is close to zero — one extra allocation per token, created once at module load time, not per resolution.',
+    html: 'This rules out an entire category of bug that string-keyed containers have to work around by convention (namespacing keys, linting for duplicates): here it is structurally impossible for two unrelated <code>createToken</code> calls to collide, because JavaScript guarantees every <code>Symbol()</code> call produces a unique value.',
+  },
+  {
+    type: 'p',
+    html: 'The cost is close to zero — one extra allocation per token, created once at module load time, not per resolution. That is a rare shape for a trade-off: usually a stronger guarantee costs you something, in runtime overhead or in ergonomics, and here neither cost applies.',
+  },
+  {
+    type: 'p',
+    html: 'This was one of two spots in the core library that needed actual design work instead of an obvious default — the token shape here, and figuring out, after a cycle is detected, how to <a href="detecting-circular-dependencies.html">explain it back to a developer</a>.',
   },
 ];

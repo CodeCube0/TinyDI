@@ -68,7 +68,11 @@ export class CircularDependencyError extends ContainerError { /* ... */ }`,
   },
   {
     type: 'p',
-    html: "È stata una scelta deliberata, non l'unica ragionevole: una classe di errore dichiarata dalla specifica ma non descritta richiedeva comunque una decisione di design per essere onorata come un contratto pubblico vero, invece di essere lasciata a quello che l'implementazione avrebbe fatto per prima. La sovrascrittura silenziosa è una trappola in un container DI — registrare per sbaglio lo stesso token due volte (per esempio una volta nel codice applicativo, una volta in un setup di test che ha dimenticato di ripulire) è esattamente il tipo di bug che diventa rumoroso e ovvio nel momento stesso in cui accade con un throw esplicito, e silenzioso e difficile da tracciare se la seconda registrazione vince e basta.",
+    html: "È stata una scelta deliberata, non l'unica ragionevole: una classe di errore dichiarata dalla specifica ma non descritta richiedeva comunque una decisione di design per essere onorata come un contratto pubblico vero, invece di essere lasciata a quello che l'implementazione avrebbe fatto per prima.",
+  },
+  {
+    type: 'p',
+    html: "La sovrascrittura silenziosa è una trappola in un container DI. Registrare per sbaglio lo stesso token due volte — una volta nel codice applicativo, una volta in un setup di test che ha dimenticato di ripulire, nel caso più comune — è esattamente il tipo di bug che diventa rumoroso e ovvio nel momento stesso in cui accade con un throw esplicito, e silenzioso e difficile da tracciare se la seconda registrazione vince e basta. Lanciare un errore costa un po' di comodità; lasciarlo correre costa una sessione di debug, settimane dopo, per capire perché viene risolta l'implementazione sbagliata.",
   },
   {
     type: 'callout',
@@ -84,6 +88,6 @@ export class CircularDependencyError extends ContainerError { /* ... */ }`,
   },
   {
     type: 'p',
-    html: 'Una gerarchia di quattro classi al posto di un <code>Error</code> piatto è poco codice in più, ma permette a chi consuma la libreria di distinguere il tipo di fallimento quando serve (per esempio trattare un <code>ResolutionError</code> per un servizio opzionale in modo diverso da un <code>RegistrationError</code> emerso durante il bootstrap dell\'app), pur potendo intercettare tutto ciò che riguarda la DI con un solo controllo <code>instanceof ContainerError</code>. Vedi la <a href="../docs/api-reference.html">API Reference</a> per la superficie completa degli errori.',
+    html: 'Una gerarchia di quattro classi al posto di un <code>Error</code> piatto è poco codice in più, ma permette a chi consuma la libreria di distinguere il tipo di fallimento quando serve (per esempio trattare un <code>ResolutionError</code> per un servizio opzionale in modo diverso da un <code>RegistrationError</code> emerso durante il bootstrap dell\'app), pur potendo intercettare tutto ciò che riguarda la DI con un solo controllo <code>instanceof ContainerError</code>. <code>CircularDependencyError</code>, la quarta sottoclasse, ha <a href="detecting-circular-dependencies.html">un post tutto suo</a> — lì la parte interessante non era la classe in sé ma il formato del messaggio. Vedi la <a href="../docs/api-reference.html">API Reference</a> per la superficie completa degli errori.',
   },
 ];

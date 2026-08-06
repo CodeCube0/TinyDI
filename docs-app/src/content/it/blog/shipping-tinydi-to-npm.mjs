@@ -61,9 +61,13 @@ export const blocks = [
     title: 'Perché questo conta oltre la correzione di una riga',
     html: "Riconoscere che un errore proviene dagli interni del build tool piuttosto che dalla propria configurazione cambia il modo in cui lo risolvi: l'alternativa sarebbe stata inseguire un'inesistente impostazione <code>baseUrl</code> nei nostri stessi file <code>tsconfig.json</code>, dove non è mai stato il problema reale.",
   },
-  { type: 'heading', level: 2, id: 'consequences', text: 'Cosa ha comprato, in concreto' },
+  { type: 'heading', level: 2, id: 'consequences', text: 'Il risultato concreto' },
   {
     type: 'p',
     html: 'Il risultato è un pacchetto che fa tree-shaking in modo pulito (output ESM, nessun codice a livello di modulo con side-effect) e funziona allo stesso modo indipendentemente dal fatto che il bundler di chi consuma scelga la condizione <code>import</code> o <code>require</code> — verificato in pratica dai sette esempi di questo progetto, che coprono sia una toolchain frontend basata su Vite sia semplici script Node <code>tsx</code>, tutti in grado di risolvere correttamente lo stesso pacchetto.',
+  },
+  {
+    type: 'p',
+    html: 'Sistemare il pacchetto in sé si è rivelato necessario ma non sufficiente. Pubblicarlo per davvero — il punto in cui un package.json incontra l\'infrastruttura reale di npm — ha fatto emergere una serie di problemi separati che nulla di tutto questo aveva previsto, raccontati <a href="what-the-phase-4-plan-couldnt-predict.html">nel post sulla release</a>.',
   },
 ];
