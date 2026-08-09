@@ -6,9 +6,6 @@ function svg(paths, viewBox = '0 0 24 24') {
 }
 
 export const icons = {
-  logo: svg(
-    '<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><path d="M7 10.5v3a3 3 0 0 0 3 3h4"/><path d="M14.5 16.5v-3a3 3 0 0 0-3-3"/>',
-  ),
   menu: svg('<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>'),
   close: svg('<path d="M6 6l12 12"/><path d="M18 6L6 18"/>'),
   search: svg('<circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/>'),

@@ -89,7 +89,7 @@ function headerMarkup({ lang, pageId, section }) {
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__logo" href="${homeHref(lang)}">
-        ${icon('logo')}
+        <img src="${BASE_PATH}/assets/logo.jpeg" alt="" width="24" height="24" />
         <span>${s.siteName}</span>
       </a>
       <nav class="site-header__nav" aria-label="Primary">

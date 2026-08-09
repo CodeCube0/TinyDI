@@ -21,7 +21,7 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "Ciò che rende difendibili i tagli qui sotto, e non solo un \"non abbiamo fatto in tempo\", è che ciascuna delle quattro estensioni è stata verificata rispetto al design attuale ed è risultata comunque raggiungibile senza un breaking change. Un taglio di scope irreversibile è una scommessa molto più rischiosa di uno che si può ancora disfare più avanti.",
+    html: 'Ciò che rende difendibili i tagli qui sotto, e non solo un "non abbiamo fatto in tempo", è che ciascuna delle quattro estensioni è stata verificata rispetto al design attuale ed è risultata comunque raggiungibile senza un breaking change. Un taglio di scope irreversibile è una scommessa molto più rischiosa di uno che si può ancora disfare più avanti.',
   },
   { type: 'heading', level: 2, id: 'scoped', text: 'Lifetime Scoped' },
   {

@@ -17,7 +17,7 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "La specifica escludeva un framework a runtime per il sito consegnato — nulla lato client che faccia routing, hydration o rendering. Non escludeva un piccolo script eseguito in fase di build che trasforma contenuto strutturato in file statici, che è una cosa del tutto diversa da ciò che il browser di chi legge deve eseguire.",
+    html: 'La specifica escludeva un framework a runtime per il sito consegnato — nulla lato client che faccia routing, hydration o rendering. Non escludeva un piccolo script eseguito in fase di build che trasforma contenuto strutturato in file statici, che è una cosa del tutto diversa da ciò che il browser di chi legge deve eseguire.',
   },
   {
     type: 'p',
@@ -59,6 +59,6 @@ export const blocks = [
   },
   {
     type: 'p',
-    html: "Questi tre non sono stati gli ultimi bug che questo sito ha prodotto allo stesso modo. Un giro successivo, dopo che il sito è andato davvero online, ne ha fatto emergere un'altra tornata, indipendente, raccontata <a href=\"what-the-phase-4-plan-couldnt-predict.html\">nel post sulla release</a> — una build pulita non è la stessa cosa di una pagina che funziona davvero, e a questo progetto è toccato impararlo due volte.",
+    html: 'Questi tre non sono stati gli ultimi bug che questo sito ha prodotto allo stesso modo. Un giro successivo, dopo che il sito è andato davvero online, ne ha fatto emergere un\'altra tornata, indipendente, raccontata <a href="what-the-phase-4-plan-couldnt-predict.html">nel post sulla release</a> — una build pulita non è la stessa cosa di una pagina che funziona davvero, e a questo progetto è toccato impararlo due volte.',
   },
 ];

@@ -82,10 +82,10 @@
   margin-right: auto;
 }
 
-.site-header__logo svg {
+.site-header__logo img {
   width: 1.5rem;
   height: 1.5rem;
-  color: var(--accent);
+  border-radius: var(--radius-sm);
 }
 
 .site-header__nav {

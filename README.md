@@ -1,10 +1,20 @@
-# TinyDI
+<p align="center">
+  <img src="./.github/assets/logo.jpeg" alt="TinyDI logo" width="120" />
+</p>
 
-A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.
+<h1 align="center">TinyDI</h1>
 
-[![npm version](https://img.shields.io/npm/v/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
-[![npm downloads](https://img.shields.io/npm/dm/tinydi-container.svg)](https://www.npmjs.com/package/tinydi-container)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+<p align="center">A minimal, type-safe, decorator-free Dependency Injection container for TypeScript.</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/tinydi-container"><img src="https://img.shields.io/npm/v/tinydi-container.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/tinydi-container"><img src="https://img.shields.io/npm/dm/tinydi-container.svg" alt="npm downloads" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+</p>
+
+<p align="center">
+  <img src="./.github/assets/cover.jpeg" alt="TinyDI — Token, Container, Factory, Instance resolution graph" width="100%" />
+</p>
 
 📚 **[Full documentation](https://codecube0.github.io/TinyDI/)**
 
