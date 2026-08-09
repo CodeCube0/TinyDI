@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4
+
+### Patch Changes
+
+- c59738e: Add the TinyDI brand logomark (README header, docs site header) and the promotional cover banner (README) in English and Italian.
+
 ## 0.1.3
 
 ### Patch Changes
